@@ -1,13 +1,10 @@
 package com.syraven.cloud;
 
-import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+public class UserServiceApplicationTests {
 
-@SpringBootTest
-class UserServiceApplicationTests {
+    public static void main(String[] args) {
 
-    @Test
-    void contextLoads() {
+        //金额的计算
     }
 
 }

@@ -1,20 +1,15 @@
 server:
-  port: 8201
+  port: 8401
 spring:
   application:
-    name: user-service
-
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: 123456
-    timeout: 4000
-    database:
-      sync: 1
+    name: hystrix-service
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8001/eureka/
+service-url:
+  user-service: http://user-service
+
 

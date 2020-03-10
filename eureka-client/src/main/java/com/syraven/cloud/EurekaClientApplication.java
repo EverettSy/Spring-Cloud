@@ -13,6 +13,7 @@ public class EurekaClientApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(EurekaClientApplication.class, args);
+        System.out.println("sdd");
     }
 
 }

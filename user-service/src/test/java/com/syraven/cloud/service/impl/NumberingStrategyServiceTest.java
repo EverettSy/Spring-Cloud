@@ -13,6 +13,9 @@ public class NumberingStrategyServiceTest {
     @Autowired
     private NumberingStrategyService numberingStrategyService;
 
+    @Autowired
+    private ContractNumberingStrategyService contractNumberingStrategyService;
+
     @Test
     public void getCode() {
         /*String ownerCode = numberingStrategyService.getCode("FD","0571");
@@ -37,17 +40,21 @@ public class NumberingStrategyServiceTest {
         String re = "黑龙江省";
         int se = re.lastIndexOf("省");
         System.out.println(se);
-        String res = re.substring(0,re.indexOf("省"))+"省";
+        String res = re.substring(0, re.indexOf("省")) + "省";
         System.out.println(res);
 
        /* String czDCode = numberingStrategyService.getCode("CZJG","023");
         System.out.println(czDCode);
 */
-        String czDCode = numberingStrategyService.getCode("HS","0574");
+       /* String czDCode = numberingStrategyService.getCode("HS","0574");
+        System.out.println(czDCode);*/
+
+        /*String czDCode = numberingStrategyService.getCode("HZCK-CZ", "0512");
+        System.out.println(czDCode);*/
+
+        String czDCode = contractNumberingStrategyService.getContractNumCode("HZCK-CZ", "021","ck2");
         System.out.println(czDCode);
     }
-
-
 
 
 }

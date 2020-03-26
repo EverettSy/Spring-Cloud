@@ -19,6 +19,7 @@
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
@@ -36,6 +37,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>true</scope>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -44,6 +52,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>20.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -65,10 +84,58 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
             <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>1.7.0</version>
+                <!--将插件绑定在某个phase执行-->
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <!--用户只需执行mvn package ，就会自动执行mvn docker:build-->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字-->
+                    <from>
+                        <!--使用openjdk官方镜像，tag是8-jdk-stretch，表示镜像的操作系统是debian9,装好了jdk8-->
+                        <image>47.97.166.67:5000/java:8</image>
+                    </from>
+                    <!--配置最终推送的地址，仓库名，镜像名-->
+                    <to>
+                        <!--这里我配置的是私服，如何配置公服地址请参考我的《如何使用docker打包Springboot的四种方式》文章 -->
+                        <image>47.97.166.67:5000/${project.artifactId}:${project.version}</image>
+                        <tags>
+                            <tag>0.1</tag>
+                        </tags>
+                    </to>
+                    <!--容器相关的属性-->
+                    <container>
+                        <!--jvm内存参数-->
+                        <jvmFlags>
+                            <jvmFlag>-Xms4g</jvmFlag>
+                            <jvmFlag>-Xmx4g</jvmFlag>
+                        </jvmFlags>
+                        <!--要暴露的端口-->
+                        <ports>
+                            <port>8201</port>
+                        </ports>
+                    </container>
+                    <!--这里是必须要配置的，因为私服是http不是https，默认jib不给你推送到非https的私服-->
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                </configuration>
+            </plugin>
+
+
+            <!--<plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>1.2.2</version>
+                <version>1.0.0</version>
                 <executions>
                     <execution>
                         <id>build-image</id>
@@ -79,20 +146,21 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--镜像名称-->
-                    <imageName>Spring-Cloud/${project.artifactId}:${project.version}</imageName>
+                    <imageName>spring-cloud/${project.artifactId}:${project.version}</imageName>
                     <dockerHost>http://47.97.166.67:5000</dockerHost>
                     <baseImage>java:8</baseImage>
-                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <entryPoint>["java", "-jar","/${project.build.finalName}.jar"]
+                    </entryPoint>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
                             <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}</include>
+                            <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
                 </configuration>
-            </plugin>
+            </plugin>-->
+
         </plugins>
     </build>
 

@@ -3,6 +3,9 @@ package com.syraven.cloud.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * <<用户实体类>>
@@ -13,7 +16,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@ToString
+public class User implements Serializable {
 
     private Integer id;
     private String username;

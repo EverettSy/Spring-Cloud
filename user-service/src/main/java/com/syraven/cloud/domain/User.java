@@ -18,7 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@ApiModel("用户实体类")
+@ApiModel(value = "用户实体",description = "用户实体")
 public class User implements Serializable {
 
     private Integer id;

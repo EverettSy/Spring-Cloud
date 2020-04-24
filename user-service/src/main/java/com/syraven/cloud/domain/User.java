@@ -1,5 +1,6 @@
 package com.syraven.cloud.domain;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@ApiModel(value = "用户实体",description = "用户实体")
 public class User implements Serializable {
 
     private Integer id;

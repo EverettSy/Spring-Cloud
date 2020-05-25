@@ -46,7 +46,7 @@ public class UserService {
         }else if (id == 2){
             throw new NullPointerException();
         }
-        return restTemplate.getForObject(userServiceUrl +"/user/{1}",CommonResult.class,id);
+        return restTemplate.getForObject(userServiceUrl +"/user/{id}",CommonResult.class,id);
     }
 
     public CommonResult getDefaultUser2(@PathVariable Integer id,Throwable e){
@@ -55,6 +55,19 @@ public class UserService {
         return new CommonResult<>(defaultUser);
     }
 
+    /**
+     * 设置命令、分组及线程池名称
+     *
+     * fallbackMethod：指定服务降级处理方法；
+     * ignoreExceptions：忽略某些异常，不发生服务降级；
+     * commandKey：命令名称，用于区分不同的命令；
+     * groupKey：分组名称，Hystrix会根据不同的分组来统计命令的告警及仪表盘信息；
+     * threadPoolKey：线程池名称，用于划分线程池。
+     *
+     * @param id
+     * @return
+     */
+
     @HystrixCommand(fallbackMethod = "getDefaultUser",
             commandKey = "getUserCommand",
             groupKey = "getUserGroup",
@@ -62,14 +75,14 @@ public class UserService {
     )
     public CommonResult getUserCommand(@PathVariable Integer id){
         logger.info("getUserCommand id:{}",id);
-        return restTemplate.getForObject(userServiceUrl+"/user/{1}",CommonResult.class,id);
+        return restTemplate.getForObject(userServiceUrl+"/user/{id}",CommonResult.class,id);
     }
 
     @CacheResult(cacheKeyMethod = "getCacheKey")
     @HystrixCommand(fallbackMethod = "getDefaultUser",commandKey = "getUserCache")
     public CommonResult getUserCache(Integer id){
         logger.info("getUserCache id:{}",id);
-        return restTemplate.getForObject(userServiceUrl + "/user/{1}",CommonResult.class,id);
+        return restTemplate.getForObject(userServiceUrl + "/user/{id}",CommonResult.class,id);
     }
 
     /**

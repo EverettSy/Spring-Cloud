@@ -3,15 +3,22 @@ package com.syraven.cloud.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.cache.CacheManager;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
+import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -28,18 +35,22 @@ import java.lang.reflect.Method;
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
+    @Value("${spring.redis.host}")
+    private String redisUrl;
+    @Value("${spring.redis2.host}")
+    private String redisUrl2;
     //缓存管理器
-    @Bean
-    public CacheManager cacheManager(RedisConnectionFactory factory){
+    /*@Bean
+    public CacheManager cacheManager(@Qualifier("redisConnectionFactory") RedisConnectionFactory factory) {
         RedisCacheManager cacheManager = RedisCacheManager.builder(factory).build();
         return cacheManager;
-    }
+    }*/
 
     //自定义缓存key生成策略
     @Override
     @Bean
-    public KeyGenerator keyGenerator(){
-        return new KeyGenerator(){
+    public KeyGenerator keyGenerator() {
+        return new KeyGenerator() {
             @Override
             public Object generate(Object target, Method method, Object... params) {
                 StringBuffer sb = new StringBuffer();
@@ -48,16 +59,107 @@ public class RedisConfig extends CachingConfigurerSupport {
                 for (Object object : params) {
                     sb.append(object.toString());
                 }
-                System.out.println("调用Redis生成key"+sb.toString());
+                System.out.println("调用Redis生成key" + sb.toString());
                 return sb.toString();
             }
         };
     }
 
-    public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory factory){
+    /**
+     * 配置 lettuce连接池
+     *
+     * @return
+     */
+    @Bean
+    @ConfigurationProperties(prefix = "spring.redis.lettuce.pool")
+    public GenericObjectPoolConfig redisPool() {
+        return new GenericObjectPoolConfig<>();
+    }
+
+
+    /**
+     * 配置第一个数据源
+     *
+     * @return
+     */
+    @Bean("redisClusterConfig")
+    @Primary
+    @ConfigurationProperties(prefix = "spring.redis")
+    public RedisStandaloneConfiguration redisClusterConfig() {
+        return new RedisStandaloneConfiguration(redisUrl);
+    }
+
+    /**
+     * 配置第二个数据源
+     *
+     * @return
+     */
+    @Bean("secondaryRedisClusterConfig")
+    @ConfigurationProperties(prefix = "spring.redis2")
+    public RedisStandaloneConfiguration secondaryRedisClusterConfig() {
+        return new RedisStandaloneConfiguration(redisUrl2);
+    }
+
+
+    /**
+     * 配置第一个数据源的连接工厂
+     * 这里注意：需要添加@Primary 指定bean的名称，目的是为了创建两个不同名称的LettuceConnectionFactory
+     *
+     * @param poolConfig
+     * @param redisClusterConfig
+     * @return
+     */
+    @Bean("factory")
+    @Primary
+    public LettuceConnectionFactory factory(GenericObjectPoolConfig poolConfig, @Qualifier("redisClusterConfig")RedisStandaloneConfiguration redisClusterConfig) {
+        LettuceClientConfiguration clientConfiguration = LettucePoolingClientConfiguration.builder().poolConfig(poolConfig).build();
+        return new LettuceConnectionFactory(redisClusterConfig, clientConfiguration);
+    }
+
+    /**
+     * 配置第二个数据源的连接工厂
+     *
+     * @param poolConfig
+     * @param secondaryRedisClusterConfig
+     * @return
+     */
+    @Bean("factory2")
+    public LettuceConnectionFactory factory2(GenericObjectPoolConfig poolConfig, @Qualifier("secondaryRedisClusterConfig")RedisStandaloneConfiguration secondaryRedisClusterConfig) {
+        LettuceClientConfiguration clientConfiguration = LettucePoolingClientConfiguration.builder().poolConfig(poolConfig).build();
+        return new LettuceConnectionFactory(secondaryRedisClusterConfig, clientConfiguration);
+    }
+
+
+    /**
+     * 配置第一个数据源的RedisTemplate
+     * 注意：这里指定使用名称=factory 的 RedisConnectionFactory
+     * 并且标识第一个数据源是默认数据源 @Primary
+     *
+     * @param factory
+     * @return
+     */
+    @Bean("redisTemplate")
+    @Primary
+    public RedisTemplate<String, Object> redisTemplate(@Qualifier("factory") RedisConnectionFactory factory) {
+        return getStringRedisTemplate(factory);
+    }
+
+    @Bean("secondaryRedisTemplate")
+    public RedisTemplate<String, Object> redisTemplate2(@Qualifier("factory2") RedisConnectionFactory factory2) {
+        return getStringRedisTemplate(factory2);
+    }
+
+
+    /**
+     * 设置序列化方式
+     *
+     * @param factory
+     * @return
+     */
+    public RedisTemplate<String, Object> getStringRedisTemplate(RedisConnectionFactory factory) {
 
         // 配置连接工厂
-        RedisTemplate<String,Object> template = new RedisTemplate<>();
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
         //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值（默认使用JDK的序列化方式）
         Jackson2JsonRedisSerializer jacksonSeial = new Jackson2JsonRedisSerializer(Object.class);
@@ -81,5 +183,60 @@ public class RedisConfig extends CachingConfigurerSupport {
 
         return template;
 
+    }
+
+    /**
+     * 对hash类型的数据操作
+     *
+     * @param redisTemplate
+     * @return
+     */
+    @Bean
+    public HashOperations<String, String, Object> hashOperations(RedisTemplate<String, Object> redisTemplate) {
+        return redisTemplate.opsForHash();
+    }
+
+    /**
+     * 对字符串类型的数据操作
+     *
+     * @param redisTemplate
+     * @return
+     */
+    @Bean
+    public ValueOperations<String, Object> valueOperations(RedisTemplate<String, Object> redisTemplate) {
+        return redisTemplate.opsForValue();
+    }
+
+    /**
+     * 对链表类型的数据操作
+     *
+     * @param redisTemplate
+     * @return
+     */
+    @Bean
+    public ListOperations<String, Object> listOperations(RedisTemplate<String, Object> redisTemplate) {
+        return redisTemplate.opsForList();
+    }
+
+    /**
+     * 对无序集合类型的数据操作
+     *
+     * @param redisTemplate
+     * @return
+     */
+    @Bean
+    public SetOperations<String, Object> setOperations(RedisTemplate<String, Object> redisTemplate) {
+        return redisTemplate.opsForSet();
+    }
+
+    /**
+     * 对有序集合类型的数据操作
+     *
+     * @param redisTemplate
+     * @return
+     */
+    @Bean
+    public ZSetOperations<String, Object> zSetOperations(RedisTemplate<String, Object> redisTemplate) {
+        return redisTemplate.opsForZSet();
     }
 }

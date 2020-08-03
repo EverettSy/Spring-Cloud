@@ -2,12 +2,18 @@ package com.syraven.cloud.service.impl;
 
 import com.syraven.cloud.domain.User;
 import com.syraven.cloud.service.UserService;
+import org.redisson.Redisson;
+import org.redisson.api.RRateLimiter;
+import org.redisson.api.RateIntervalUnit;
+import org.redisson.api.RateType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +24,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Resource
+    private Redisson redisson;
 
     private List<User> userList;
 
@@ -32,6 +41,16 @@ public class UserServiceImpl implements UserService {
         if (!CollectionUtils.isEmpty(findUserList)) {
             return findUserList.get(0);
         }
+        RRateLimiter rateLimiter = redisson.getRateLimiter("myRateLimiter");
+        //初始化
+        //最大流速 - 每秒钟产生10个令牌
+        rateLimiter.trySetRate(RateType.OVERALL,10,1, RateIntervalUnit.SECONDS);
+        CountDownLatch latch = new CountDownLatch(2);
+        rateLimiter.acquire(2);
+
+        Thread thread = new Thread(() -> {
+            rateLimiter.acquire(2);
+        });
         return null;
     }
 

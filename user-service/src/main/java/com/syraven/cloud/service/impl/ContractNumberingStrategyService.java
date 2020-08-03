@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Raven
  * @date 2019/12/20 15:21
  */
-@Service
+@Service("SD")
 public class ContractNumberingStrategyService {
 
     Map<String, ContractNumberingStrategy> numberingStrategyMap = new HashMap<>();

@@ -160,15 +160,15 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>1.7.0</version>
-                <!--将插件绑定在某个phase执行-->
+                &lt;!&ndash;将插件绑定在某个phase执行&ndash;&gt;
                 <executions>
                     <execution>
                         <id>build-image</id>
-                        <!--用户只需执行mvn package ，就会自动执行mvn docker:build-->
+                        &lt;!&ndash;用户只需执行mvn package ，就会自动执行mvn docker:build&ndash;&gt;
                         <phase>package</phase>
                         <goals>
                             <goal>build</goal>
@@ -176,35 +176,35 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字-->
+                    &lt;!&ndash;from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字&ndash;&gt;
                     <from>
-                        <!--使用openjdk官方镜像，tag是8-jdk-stretch，表示镜像的操作系统是debian9,装好了jdk8-->
+                        &lt;!&ndash;使用openjdk官方镜像，tag是8-jdk-stretch，表示镜像的操作系统是debian9,装好了jdk8&ndash;&gt;
                         <image>47.97.166.67:5000/java:8</image>
                     </from>
-                    <!--配置最终推送的地址，仓库名，镜像名-->
+                    &lt;!&ndash;配置最终推送的地址，仓库名，镜像名&ndash;&gt;
                     <to>
-                        <!--这里我配置的是私服，如何配置公服地址请参考我的《如何使用docker打包Springboot的四种方式》文章 -->
+                        &lt;!&ndash;这里我配置的是私服，如何配置公服地址请参考我的《如何使用docker打包Springboot的四种方式》文章 &ndash;&gt;
                         <image>47.97.166.67:5000/${project.artifactId}:${project.version}</image>
                         <tags>
                             <tag>0.1</tag>
                         </tags>
                     </to>
-                    <!--容器相关的属性-->
+                    &lt;!&ndash;容器相关的属性&ndash;&gt;
                     <container>
-                        <!--jvm内存参数-->
+                        &lt;!&ndash;jvm内存参数&ndash;&gt;
                         <jvmFlags>
                             <jvmFlag>-Xms4g</jvmFlag>
                             <jvmFlag>-Xmx4g</jvmFlag>
                         </jvmFlags>
-                        <!--要暴露的端口-->
+                        &lt;!&ndash;要暴露的端口&ndash;&gt;
                         <ports>
                             <port>8201</port>
                         </ports>
                     </container>
-                    <!--这里是必须要配置的，因为私服是http不是https，默认jib不给你推送到非https的私服-->
+                    &lt;!&ndash;这里是必须要配置的，因为私服是http不是https，默认jib不给你推送到非https的私服&ndash;&gt;
                     <allowInsecureRegistries>true</allowInsecureRegistries>
                 </configuration>
-            </plugin>
+            </plugin>-->
 
 
             <!--<plugin>
@@ -235,6 +235,34 @@
                     </resources>
                 </configuration>
             </plugin>-->
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <imageName>springcloud/${project.artifactId}:${project.version}</imageName>
+                    <dockerHost>http://47.97.166.67:5000</dockerHost>
+                    <baseImage>java:8</baseImage>
+                    <entryPoint>["java", "-jar", "-Dspring.profiles.active=prod","/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
 
         </plugins>
     </build>

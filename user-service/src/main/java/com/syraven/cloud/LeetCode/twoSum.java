@@ -1,6 +1,5 @@
 package com.syraven.cloud.LeetCode;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,11 +54,11 @@ public class twoSum {
         throw new IllegalArgumentException("No two sum solution");
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] nums = {2, 5,7, 11, 15};
         int target = 9;
         //int[] result = twoSum(nums, target);
         int[] result = twoSum3(nums, target);
         System.out.println(Arrays.toString(result));
-    }
+    }*/
 }

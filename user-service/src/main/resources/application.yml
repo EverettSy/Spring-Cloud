@@ -3,10 +3,13 @@ server:
 spring:
   application:
     name: user-service
+  jackson:
+     date-format: yyyy-MM-dd HH:mm:ss
+     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/db_springboot?characterEncoding=utf8&serverTimezone=UTC
-    username: root
-    password: 123456
+    url: jdbc:mysql://47.99.140.202:33061/tax_console?characterEncoding=utf8&serverTimezone=UTC
+    username: tax_console
+    password: 9YyacS44Xg67rTdL
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -43,9 +46,9 @@ spring:
         login-username: root
         login-password: 123456
   redis:
-    host: 192.168.0.152
+    host: 192.168.152.45
     port: 6379
-    password: Ca@6SwfsbA&C8FGK
+    password: '123456'
     timeout: 4000
     database: 0
     lettuce:
@@ -57,14 +60,14 @@ spring:
         # 方法参数是Duration，IDEA无法识别，但是会自动注入成功
         max-wait: 2000  # 当连接池耗尽时，抛出异常之前，连接分配被阻塞的时间，也就是连接池满后最长等待时间，负值表示无限期等待
   redis2:
-    host: 192.168.0.152
+    host: 192.168.152.45
     port: 6379
-    password: Ca@6SwfsbA&C8FGK
+    password: '123456'
     database: 1
   #mongodb配置
-  data:
-    mongodb:
-      uri: mongodb://chaoke:admin@192.168.0.157:27017/ck_dev
+#  data:
+#    mongodb:
+#      uri: mongodb://chaoke:admin@192.168.0.157:27017/ck_dev
 
 eureka:
   client:
@@ -109,3 +112,11 @@ mybatis-plus:
 productDetailCouponCache:
   begin: 1
   end: 2
+
+# ===== 自定义swagger配置 ===== #
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description:
+  try-host: http://localhost:${server.port}

@@ -6,13 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * @author YuSong
  */
+@EnableOpenApi
 @EnableEurekaClient
-@EnableSwagger2
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.syraven.cloud.*"})
 public class UserServiceApplication {

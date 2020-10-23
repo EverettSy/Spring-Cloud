@@ -3,7 +3,6 @@ package com.syraven.cloud.util;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.common.collect.Lists;
 import org.bson.types.ObjectId;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -89,16 +88,17 @@ public class MongoPageHelper {
             query.skip(skip).limit(pageSize);
         }
 
-        final List<T> entityList = mongoTemplate
+       /* final List<T> entityList = mongoTemplate
                 .find(query.addCriteria(criteria)
                                 .with(new Sort(Lists.newArrayList(new Sort.Order(Sort.Direction.ASC, ID)))),
-                        entityClass);
+                        entityClass);*/
 
         final PageResult<R> pageResult = new PageResult<>();
         pageResult.setTotal(total);
         pageResult.setPages(pages);
         pageResult.setPageSize(pageSize);
         pageResult.setPageNum(pageNum);
+        List<T> entityList = Lists.newArrayList();
         pageResult.setList(entityList.stream().map(mapper).collect(Collectors.toList()));
 
         return pageResult;

@@ -1,6 +1,6 @@
 package com.syraven.cloud.service.impl;
 
-import com.syraven.cloud.domain.*;
+import com.syraven.cloud.domain.User;
 import com.syraven.cloud.service.UserService;
 import org.redisson.Redisson;
 import org.redisson.api.RRateLimiter;

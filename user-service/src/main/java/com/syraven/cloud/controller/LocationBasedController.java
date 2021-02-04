@@ -68,7 +68,7 @@ public class LocationBasedController {
     }
 
     @ApiOperation(value = "获取附近x米的人2")
-    @PostMapping(value = "//nearby")
+    @PostMapping(value = "/nearby")
     public CommonResult<List<UserGeohash>> nearBySearch(@RequestBody UserGeohashBo userGeohashBo) {
         //1.根据要求的范围，确定geoHash码的精度，获取到当前用户坐标的geoHash码
         GeoHash geoHash = GeoHash.withCharacterPrecision(userGeohashBo.getUserLat(), userGeohashBo.getUserLng(), userGeohashBo.getLen());

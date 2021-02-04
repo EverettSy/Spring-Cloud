@@ -98,18 +98,34 @@
             <version>1.4.0</version>
         </dependency>
 
-        <!-- Mybait-Plus -->
+       <!-- &lt;!&ndash; Mybait-Plus &ndash;&gt;
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.3.0</version>
         </dependency>
 
-        <!-- Mybait-Plus代码生成 begin -->
+        &lt;!&ndash; Mybait-Plus代码生成 begin &ndash;&gt;
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.3.0</version>
+        </dependency>-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <!--mybatis plus extension,包含了mybatis plus core-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.4.0</version>
         </dependency>
         <!-- Mybait-Plus代码生成 end -->
         <!-- MP 代码生成默认模板(必须) -->

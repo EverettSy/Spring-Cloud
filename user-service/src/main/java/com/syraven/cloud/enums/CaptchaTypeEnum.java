@@ -1,4 +1,4 @@
-package com.syraven.cloud;
+package com.syraven.cloud.enums;
 
 /**
  * <<功能简述>>
@@ -6,7 +6,7 @@ package com.syraven.cloud;
  * @author Raven
  * @date 2020/10/23 10:29
  */
-public enum CaptchaType {
+public enum CaptchaTypeEnum {
     NUM,
     LETTERS,
     NUMLETTERS,

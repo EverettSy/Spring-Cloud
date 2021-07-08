@@ -1,4 +1,4 @@
-package com.syraven.cloud;
+package com.syraven.cloud.enums;
 
 import lombok.Getter;
 

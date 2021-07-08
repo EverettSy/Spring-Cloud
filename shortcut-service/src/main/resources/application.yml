@@ -1,15 +1,15 @@
 server:
-  port: 8201
+  port: 8202
 spring:
   application:
-    name: user-service
+    name: shortcut-service
   jackson:
      date-format: yyyy-MM-dd HH:mm:ss
      time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://47.99.140.202:33061/tax_console?characterEncoding=utf8&serverTimezone=UTC
-    username: tax_console
-    password: 9YyacS44Xg67rTdL
+    url: jdbc:mysql://127.0.0.1:3306/spring_cloud?characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -46,9 +46,9 @@ spring:
         login-username: root
         login-password: 123456
   redis:
-    host: 192.168.152.45
+    host: 47.97.166.67
     port: 6379
-    password: '123456'
+    password: 'sy199520'
     timeout: 4000
     database: 0
     lettuce:
@@ -60,9 +60,9 @@ spring:
         # 方法参数是Duration，IDEA无法识别，但是会自动注入成功
         max-wait: 2000  # 当连接池耗尽时，抛出异常之前，连接分配被阻塞的时间，也就是连接池满后最长等待时间，负值表示无限期等待
   redis2:
-    host: 192.168.152.45
+    host: 47.97.166.67
     port: 6379
-    password: '123456'
+    password: 'sy199520'
     database: 1
   #mongodb配置
 #  data:
@@ -75,6 +75,14 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8001/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    status-page-url: http://${spring.application.name}:${server.port}/swagger-ui/index.html#/
+    #Eureka Client 发送心跳给 server 端的频率 默认30秒
+    lease-renewal-interval-in-seconds: 5
+    #Eureka Server 至上一次收到 client 的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则移除该 Instance。默认90秒
+    lease-expiration-duration-in-seconds: 5
 
 knife4j:
   production: false
@@ -83,7 +91,6 @@ knife4j:
     username: admin
     password: 123321
 
-#mybatis配置
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.com.syraven.cloud.core.mybatis.xml
   type-aliases-package: com.syraven.cloud.domain
@@ -121,15 +128,3 @@ swagger:
   application-version: 1.0
   application-description:
   try-host: http://localhost:${server.port}
-
-#健康检查
-management:
-  endpoints:
-    web:
-      base-path: /actuator
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: ALWAYS
-      enabled: true

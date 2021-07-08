@@ -1,6 +1,9 @@
 package com.syraven.cloud.service.impl;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.function.Consumer;
 
 /**
@@ -107,6 +110,31 @@ public class OptionalTest {
         Optional optional9 = Optional.ofNullable(null);
         Object object2 = optional9.orElse("默认值");
         System.out.println("如果值为空："+object2);
+
+
+        Integer asum = 0;
+        Integer bsum = 0;
+        Integer csum = 0;
+        Integer dsum = 0;
+        List<String> givenList = Arrays.asList("A","B","C","D");
+        Random random = new Random();
+        for (int i = 0; i <10 ; i++) {
+            String randomElement = givenList.get(random.nextInt(givenList.size()));
+            //System.out.println(randomElement);
+            if (randomElement.equals("A")){
+                asum ++;
+            }else if (randomElement.equals("B")){
+                bsum++;
+            }else if (randomElement.equals("C")){
+                csum++;
+            }else if (randomElement.equals("D")){
+                dsum++;
+            }
+        }
+        System.out.println(asum);
+        System.out.println(bsum);
+        System.out.println(csum);
+        System.out.println(dsum);
 
 
     }

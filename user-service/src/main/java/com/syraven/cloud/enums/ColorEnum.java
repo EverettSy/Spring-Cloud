@@ -1,4 +1,4 @@
-package com.syraven.cloud;
+package com.syraven.cloud.enums;
 
 /**
  * <<功能简述>>
@@ -6,7 +6,7 @@ package com.syraven.cloud;
  * @author Raven
  * @date 2020/11/9 11:04
  */
-public enum Color {
+public enum ColorEnum {
     RED(0, "红色"),
     BLUE(1, "蓝色"),
     GREEN(2, "绿色"),
@@ -17,7 +17,7 @@ public enum Color {
     private int code;
     private String desc;
 
-    Color(int code, String desc) {
+    ColorEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
@@ -28,11 +28,11 @@ public enum Color {
      * @param code
      * @return
      */
-    public static Color getValue(int code) {
+    public static ColorEnum getValue(int code) {
 
-        for (Color color : values()) {
-            if (color.getCode() == code) {
-                return color;
+        for (ColorEnum colorEnum : values()) {
+            if (colorEnum.getCode() == code) {
+                return colorEnum;
             }
         }
         return null;

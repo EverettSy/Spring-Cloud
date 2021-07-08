@@ -40,6 +40,9 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <!--只在编译或测试的时候使用-->
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

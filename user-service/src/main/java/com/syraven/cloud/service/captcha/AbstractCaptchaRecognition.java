@@ -1,6 +1,6 @@
 package com.syraven.cloud.service.captcha;
 
-import com.syraven.cloud.CaptchaType;
+import com.syraven.cloud.enums.CaptchaTypeEnum;
 
 import java.io.File;
 
@@ -12,5 +12,5 @@ import java.io.File;
  */
 public abstract class AbstractCaptchaRecognition {
 
-    public abstract String dentificationCodesi(File file, CaptchaType captchaType);
+    public abstract String dentificationCodesi(File file, CaptchaTypeEnum captchaTypeEnum);
 }

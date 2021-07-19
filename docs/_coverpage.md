@@ -1,14 +1,12 @@
-<!-- _coverpage.md -->
-
-![logo](_media/icon.svg)
+![logo](https://docsify.js.org/_media/icon.svg)
 
 # docsify <small>3.5</small>
 
-> Ò»¸öÉñÆæµÄÎÄµµÍøÕ¾Éú³ÉÆ÷¡£
+> ä¸€ä¸ªç¥å¥‡çš„æ–‡æ¡£ç½‘ç«™ç”Ÿæˆå™¨ã€‚
 
-- ¼òµ¥¡¢Çá±ã (Ñ¹Ëõºó ~21kB)
-- ÎŞĞèÉú³É html ÎÄ¼ş
-- ÖÚ¶àÖ÷Ìâ
+- ç®€å•ã€è½»ä¾¿ (å‹ç¼©å ~21kB)
+- æ— éœ€ç”Ÿæˆ html æ–‡ä»¶
+- ä¼—å¤šä¸»é¢˜
 
 [GitHub](https://github.com/docsifyjs/docsify/)
 [Get Started](#docsify)

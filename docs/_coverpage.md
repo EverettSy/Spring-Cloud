@@ -1,14 +1,9 @@
 <!-- _coverpage.md -->
 
-![logo](_media/icon.svg)
-
-# docsify <small>3.5</small>
-
-> Ò»¸öÉñÆæµÄÎÄµµÍøÕ¾Éú³ÉÆ÷¡£
-
-- ¼òµ¥¡¢Çá±ã (Ñ¹Ëõºó ~21kB)
-- ÎŞĞèÉú³É html ÎÄ¼ş
-- ÖÚ¶àÖ÷Ìâ
+mallé¡¹ç›®ï¼ˆ39k+starï¼‰æ˜¯ä¸€å¥—ç”µå•†ç³»ç»Ÿï¼Œä½¿ç”¨ç°é˜¶æ®µä¸»æµæŠ€æœ¯å®ç°ã€‚
+æ¶µç›–äº†SpringBoot 2.3.0ã€MyBatis 3.4.6ã€Elasticsearch 7.6.2ã€
+RabbitMQ 3.7.15ã€Redis 5.0ã€MongoDB 4.2.5ã€Mysql5.7ç­‰æŠ€æœ¯ï¼Œ
+é‡‡ç”¨Dockerå®¹å™¨åŒ–éƒ¨ç½²ã€‚
 
 [GitHub](https://github.com/docsifyjs/docsify/)
 [Get Started](#docsify)

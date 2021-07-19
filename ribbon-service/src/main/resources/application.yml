@@ -13,9 +13,9 @@ service-url:
   user-service: http://user-service
 
 ribbon:
-  ConnectTimeout: 1000 #·şÎñÇëÇóÁ¬½Ó³¬Ê±Ê±¼ä£¨ºÁÃë£©
-  ReadTimeout: 3000 #·şÎñÇëÇó´¦Àí³¬Ê±Ê±¼ä£¨ºÁÃë£©
-  OkToRetryOnAllOperations: true #¶Ô³¬Ê±ÇëÇóÆôÓÃÖØÊÔ»úÖÆ
-  MaxAutoRetriesNextServer: 1 #ÇĞ»»ÖØÊÔÊµÀıµÄ×î´ó¸öÊı
-  MaxAutoRetries: 1 # ÇĞ»»ÊµÀıºóÖØÊÔ×î´ó´ÎÊı
-  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #ĞŞ¸Ä¸ºÔØ¾ùºâËã·¨
+  ConnectTimeout: 1000 #æœåŠ¡è¯·æ±‚è¿æ¥è¶…æ—¶æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
+  ReadTimeout: 3000 #æœåŠ¡è¯·æ±‚å¤„ç†è¶…æ—¶æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
+  OkToRetryOnAllOperations: true #å¯¹è¶…æ—¶è¯·æ±‚å¯ç”¨é‡è¯•æœºåˆ¶
+  MaxAutoRetriesNextServer: 1 #åˆ‡æ¢é‡è¯•å®ä¾‹çš„æœ€å¤§ä¸ªæ•°
+  MaxAutoRetries: 1 # åˆ‡æ¢å®ä¾‹åé‡è¯•æœ€å¤§æ¬¡æ•°
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #ä¿®æ”¹è´Ÿè½½å‡è¡¡ç®—æ³•

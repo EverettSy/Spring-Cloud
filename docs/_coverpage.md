@@ -1,3 +1,4 @@
+<!-- 封面 -->
 ![logo](https://docsify.js.org/_media/icon.svg)
 
 # docsify <small>3.5</small>

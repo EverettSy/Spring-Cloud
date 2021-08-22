@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: shortcut-service
+  main:
+    allow-bean-definition-overriding: true
   jackson:
      date-format: yyyy-MM-dd HH:mm:ss
      time-zone: GMT+8
@@ -50,7 +52,7 @@ spring:
     port: 6379
     password: 'sy199520'
     timeout: 4000
-    database: 0
+    database: 2
     lettuce:
       pool:
         max-active: 200 #连接池最大连接数（使用负值表示没有限制）
@@ -78,7 +80,7 @@ eureka:
     healthcheck:
       enabled: true
   instance:
-    status-page-url: http://${spring.application.name}:${server.port}/swagger-ui/index.html#/
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui/index.html#/
     #Eureka Client 发送心跳给 server 端的频率 默认30秒
     lease-renewal-interval-in-seconds: 5
     #Eureka Server 至上一次收到 client 的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则移除该 Instance。默认90秒
@@ -128,3 +130,7 @@ swagger:
   application-version: 1.0
   application-description:
   try-host: http://localhost:${server.port}
+
+# 配置域名，如果没有配，则默认是本地ip
+common:
+  domain: http://syRobin.com

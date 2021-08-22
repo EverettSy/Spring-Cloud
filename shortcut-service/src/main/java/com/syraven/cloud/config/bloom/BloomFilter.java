@@ -1,10 +1,9 @@
-package com.syraven.cloud.configuration.bloom;
+package com.syraven.cloud.config.bloom;
 
 import com.google.common.base.Preconditions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * 布隆过滤器
@@ -14,10 +13,10 @@ import javax.annotation.Resource;
 @Component
 public class BloomFilter {
 
-    @Resource
+    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    @Resource
+    @Autowired
     private BloomFilterHelper bloomFilterHelper;
 
 

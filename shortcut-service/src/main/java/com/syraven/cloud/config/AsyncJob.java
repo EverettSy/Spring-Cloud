@@ -1,8 +1,7 @@
-package com.syraven.cloud.configuration;
+package com.syraven.cloud.config;
 
-import com.syraven.cloud.configuration.bloom.BloomFilter;
+import com.syraven.cloud.config.bloom.BloomFilter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,7 +25,7 @@ public class AsyncJob {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired
+    @Resource
     private BloomFilter bloomFilter;
 
     /**
@@ -51,6 +50,13 @@ public class AsyncJob {
         return executor;
     }
 
+    //-------------------------以下是异步方法
+
+    /**
+     * 将短网址和短域名异步添加到布隆过滤器中，提升相应速度
+     * @param shortCut
+     * @param url
+     */
     public void add2RedisAndBloomFilter(String shortCut, String url) {
         log.info("正在执行异步任务，添加[shortCut]={},[url]={} 到布隆过滤器以及redis中....", shortCut, url);
         //放到redis里面

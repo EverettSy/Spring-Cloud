@@ -30,7 +30,7 @@ public class RedirectController {
      * @param response
      * @return
      */
-    @GetMapping("/*")
+    @GetMapping("/url/*")
     public RedirectView redirect(HttpServletRequest request, HttpServletResponse response) {
         String shortcut = request.getServletPath().substring(1);
         String url = urlConvertService.revertUrl(shortcut);

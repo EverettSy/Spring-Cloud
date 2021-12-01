@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
@@ -45,7 +46,7 @@ public class IdempotentAspect {
 
     private static final String DELKEY = "delKey";
 
-    @Autowired
+    @Resource
     private  Redisson redisson;
 
     @Autowired
@@ -81,7 +82,7 @@ public class IdempotentAspect {
             key = keyResolver.resolver(idempotent,joinPoint);
         }
 
-        long expireTime = idempotent.expireTIme();
+        long expireTime = idempotent.expireTime();
         String info = idempotent.info();
         TimeUnit timeUnit = idempotent.timeUnit();
         boolean delKey = idempotent.delKey();

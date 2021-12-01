@@ -29,7 +29,7 @@ public @interface Idempotent {
      * 有效期 默认：1 有效期要大于程序执行时间，否则请求还是可能会进来
      * @return expireTIme
      */
-    int expireTIme() default 1;
+    int expireTime() default 1;
 
     /**
      * 时间单位 默认： 秒s

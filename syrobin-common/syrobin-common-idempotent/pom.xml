@@ -9,10 +9,31 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <groupId>cloud.syrobin</groupId>
     <artifactId>syrobin-common-idempotent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.3</version>
     <name>syrobin-common-idempotent</name>
     <description>syrobin-common-idempotent</description>
+
+    <licenses>
+        <license>
+            <name>The ApacheSoftware License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>syrobin</name>
+            <email>sy759770423@163.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <tag>master</tag>
+        <connection>https://github.com/EverettSy/Spring-Cloud</connection>
+        <developerConnection>https://syrobin.cloud</developerConnection>
+        <url>https://github.com/EverettSy/Spring-Cloud.git</url>
+    </scm>
 
     <properties>
         <java.version>1.8</java.version>
@@ -57,9 +78,11 @@
 
     <build>
         <plugins>
+            <!--代码格式插件，默认使用spring 规则-->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>io.spring.javaformat</groupId>
+                <artifactId>spring-javaformat-maven-plugin</artifactId>
+                <version>${spring.checkstyle.plugin}</version>
             </plugin>
         </plugins>
     </build>
@@ -67,21 +90,83 @@
     <profiles>
         <profile>
             <id>release</id>
+            <build>
+                <plugins>
+                    <!-- Source-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Javadoc -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <configuration>
+                            <show>private</show>
+                            <nohelp>true</nohelp>
+                            <charset>UTF-8</charset>
+                            <encoding>UTF-8</encoding>
+                            <docencoding>UTF-8</docencoding>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                            <detectJavaApiLink>false</detectJavaApiLink>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- GPG -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- 自动发布插件-->
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
             <distributionManagement>
                 <snapshotRepository>
-                    <id>sonatype</id>
-                    <url>
-                        https://oss.sonatype.org/content/repositories/snapshots/
-                    </url>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
                 </snapshotRepository>
                 <repository>
-                    <id>sonatype</id>
-                    <url>
-                        https://oss.sonatype.org/service/local/staging/deploy/maven2/
-                    </url>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
         </profile>
     </profiles>
-
 </project>

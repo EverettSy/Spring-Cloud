@@ -2,4 +2,4 @@ spring:
   redis:
     host: 47.97.166.67
     port: 6379
-    password: 'sy199520'
+    password: x

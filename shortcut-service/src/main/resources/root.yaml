@@ -1,0 +1,12 @@
+# 配置这些主要是将actuator相关接口暴露出来。
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    jmx:
+      exposure:
+        exclude: '*'
+    web:
+      exposure:
+        include: '*'

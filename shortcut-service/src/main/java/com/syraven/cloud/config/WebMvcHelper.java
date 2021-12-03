@@ -60,16 +60,16 @@ public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> ex
                         handlerMethod.getMethod().getName(),
                         e.getMessage());
 
-            } else {
-                message = e.getMessage();
+                } else {
+                    message = e.getMessage();
+                }
+                result.setMsg(e.getMessage());
+                log.error(message, e);
             }
-            result.setMsg(e.getMessage());
-            log.error(message, e);
-        }
-        responseResult(response, result);
-        return new ModelAndView();
-    });
-}
+            responseResult(response, result);
+            return new ModelAndView();
+        });
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

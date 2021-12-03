@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  **/
 @Slf4j
 @RestControllerAdvice
-public class GeneralExceptionHandler {
+public class GlobalExceptionHandler {
 
 
     /**

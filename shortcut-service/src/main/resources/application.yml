@@ -114,10 +114,10 @@ mybatis-plus:
       #刷新mapper 调试神器
       refresh: true
     # 原生配置
-    configuration:
-      map-underscore-to-camel-case: true
-      cache-enabled: false
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 productDetailCouponCache:
   begin: 1

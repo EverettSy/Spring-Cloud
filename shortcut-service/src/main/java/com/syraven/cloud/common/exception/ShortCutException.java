@@ -1,14 +1,11 @@
 package com.syraven.cloud.common.exception;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 /**
- * @author SyRAVEN
- * @since 2021-07-08 19:47
- */
-@EqualsAndHashCode(callSuper = true)
-@Data
-public class ShortCutException extends RuntimeException{
-
+ * @ClassName ShortCutException
+ * @Description: 异常
+ * @Author syrobin
+ * @Date 2021-08-27 9:27 下午
+ * @Version V1.0
+ **/
+public class ShortCutException extends RuntimeException {
 }

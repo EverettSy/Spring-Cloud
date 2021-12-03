@@ -3,7 +3,7 @@
   * [SpringCloud架构及功能概览](foreword/sycloud_foreword.md)
   
 * 架构篇
-  
+  * [Spring Cloud系列之Commons](architecture/Spring%20Cloud系列之Commons%20-%201.%20背景与基础知识准备.md)
   
 * 业务篇
 

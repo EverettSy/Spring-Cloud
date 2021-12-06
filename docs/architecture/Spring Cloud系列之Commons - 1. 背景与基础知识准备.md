@@ -398,7 +398,7 @@ protected AutoConfigurationEntry getAutoConfigurationEntry(AnnotationMetadata an
 
 ApplicationContext 是 spring 用来容纳管理 beans 以及其生命周期的容器。ApplicationContext 的分层规定了bean的界限以及可以复用的 bean。关于 ApplicationContext 层级可以参考官方文档，这里我们通过一个简单的例子来说明下 ApplicationContext 层级以及其中的bean界限，例如某些 bean 可以被多个 ApplicationContext 共享，同时某些 bean 只在某个 ApplicationContext 生效，不同 ApplicationContext 可以声明同名或者同类型的bean这样。我们将实现一个下图所示的 ApplicationContext 结构：
 
-![图片](https://mmbiz.qpic.cn/sz_mmbiz_png/OaydzWRibYnGVadXeqoeNXicBAU6xrfxXciafsmydts2USR0lMFh0UeBUfkfGzgMfzXyot1EDVonic9ZtG1Kt3bmxg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://upload-images.jianshu.io/upload_images/18022990-3a2e1f84d3445851.png?imageMogr2/auto-orient/strip|imageView2/2/format/webp)
 
 我们会实现，一个 parent context 与三个对应 child context 的结构。
 

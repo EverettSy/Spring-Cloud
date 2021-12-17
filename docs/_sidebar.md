@@ -4,7 +4,7 @@
   
 * 架构篇
   * [Spring Cloud系列之Commons](architecture/Spring%20Cloud系列之Commons.md)
-  * [Spring Cloud系列之Commons](architecture/Spring%20Cloud系列之组件介绍.md)
+  * [Spring Cloud系列之组件介绍](architecture/Spring%20Cloud系列之组件介绍.md)
   
 * 业务篇
 

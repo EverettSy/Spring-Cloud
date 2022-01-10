@@ -240,6 +240,18 @@
             <version>${hutool.version}</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>cloud.syrobin</groupId>
+            <artifactId>syrobin-common-idempotent</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>

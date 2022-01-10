@@ -1,22 +1,10 @@
 package com.syraven.cloud;
 
-import com.google.common.collect.Lists;
-import com.syraven.cloud.config.ConfigA;
-import com.syraven.cloud.domin.User;
-import com.syraven.cloud.service.ServiceInterface;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.function.Predicate;
 
 /**
  * @ClassName: StreamTest
@@ -29,7 +17,7 @@ import java.util.stream.Stream;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class StreamTest {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         List<User> users = Lists.newArrayList();
         users.add(new User(1, "张三", "123", 30, 175));
         users.add(new User(1, "红发", "123", 40, 180));
@@ -64,9 +52,39 @@ public class StreamTest {
         bean.test();
 
 
+    }*/
 
-
+    public static void foo(int x, Predicate<Integer> condition) {
+        for (int i = 1; i < x; i++) {
+            if (condition.test(i)) {
+                System.out.print(" " + i);
+            }
+        }
     }
+
+    public static void main(String[] args) {
+
+        /*Predicate<Integer> p1 = (n) -> {
+            *//*while (n != 0) {
+                if (n % 10 == 7)
+                    return true;
+               n/= 10;
+            }
+            return false;*//*
+            if (n % 7 != 0) return false;
+            if (n % 3 == 0) return true;
+            return String.valueOf(n).contains("7");
+        };
+        foo(100, p1);*/
+    }
+
+
+    public static boolean is(int n) {
+        if (n % 7 != 0) return false;
+        if (n % 3 == 0) return true;
+        return String.valueOf(n).contains("7");
+    }
+
 
 
 }

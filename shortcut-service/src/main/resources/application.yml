@@ -93,6 +93,7 @@ knife4j:
     username: admin
     password: 123321
 
+# mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.com.syraven.cloud.core.mybatis.xml
   type-aliases-package: com.syraven.cloud.domain
@@ -119,6 +120,21 @@ mybatis-plus:
     cache-enabled: false
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+# 配置这些主要是将actuator相关接口暴露出来。
+management:
+  endpoint:
+    health:
+      show-details: always #显示健康详情
+    shutdown:
+      enabled: true # 开启shutdown端点访问
+  endpoints:
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: "*"
+
 productDetailCouponCache:
   begin: 1
   end: 2
@@ -134,3 +150,9 @@ swagger:
 # 配置域名，如果没有配，则默认是本地ip
 common:
   domain: http://syRobin.com
+
+
+jwt:
+  config:
+    key: nsx-lambert
+    ttl: 360000

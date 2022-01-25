@@ -10,4 +10,4 @@
 - 生活杂记
 
 [GitHub](https://github.com/EverettSy/Spring-Cloud)
-[Get Started](#https://everettsy.github.io/Spring-Cloud/#/)
+[Get Started](README.md)

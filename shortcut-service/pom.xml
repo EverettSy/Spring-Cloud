@@ -120,19 +120,13 @@
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.3.4</version>
-        </dependency>
-        <!--com.syraven.cloud.core.mybatis plus extension,包含了mybatis plus core-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-extension</artifactId>
-            <version>3.4.3.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.0</version>
         </dependency>
         <!-- Mybait-Plus代码生成 end -->
         <!-- MP 代码生成默认模板(必须) -->
@@ -240,16 +234,23 @@
             <version>${hutool.version}</version>
         </dependency>
 
-
+        <!--自定义幂等-->
         <dependency>
             <groupId>cloud.syrobin</groupId>
             <artifactId>syrobin-common-idempotent</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
+        </dependency>
+
+        <!-- GrayLog-->
+        <dependency>
+            <groupId>de.siegmar</groupId>
+            <artifactId>logback-gelf</artifactId>
+            <version>4.0.2</version>
         </dependency>
 
     </dependencies>

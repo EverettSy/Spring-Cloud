@@ -156,3 +156,14 @@ jwt:
   config:
     key: nsx-lambert
     ttl: 360000
+
+seata:
+  tx-service-group: my_test_tx_group
+  service:
+    vgroup-mapping:
+      my_test_tx_group: seata-server # 此处配置对应Server端配置registry.eureka.application的值
+  registry:
+    type: eureka
+    eureka:
+      service-url: http://localhost:8001/eureka/
+      weight: 1

@@ -1,14 +1,18 @@
 package com.syraven.cloud;
 
+import com.syraven.cloud.codec.FastJsonDecoder;
 import com.syraven.cloud.codec.TestErrorDecoder;
+import com.syraven.cloud.handler.SimplePrintMethodInvocationHandler;
+import com.syraven.cloud.service.GitHub;
 import com.syraven.cloud.service.TestHttpBin;
+import com.syraven.cloud.service.TestService;
+import com.syraven.cloud.service.impl.TestServiceImpl;
 import feign.ExceptionPropagationPolicy;
 import feign.Feign;
 import feign.Request;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import java.lang.reflect.Proxy;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -18,9 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @Date 2021-11-16 5:33 下午
  * @Version V1.0
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class FeginTest {
+public class FeginTest extends SpringTest{
 
 
     public static void main(String[] args) {
@@ -61,6 +63,34 @@ public class FeginTest {
                 .target(TestHttpBin.class, "http://httpbin.org");
         Object o = httpBin.get();
         System.out.println(o);
+
+
+
+        //首先，创建要代理的对象
+        TestServiceImpl testServiceImpl = new TestServiceImpl();
+        //然后使用要代理的对象创建对应的 InvocationHandler
+        SimplePrintMethodInvocationHandler simplePrintMethodInvocationHandler =
+                new SimplePrintMethodInvocationHandler(testServiceImpl);
+        //创建代理类，因为一个类可能实现多个接口，所以这里返回的是 Object，用户根据自己需要强制转换成要用的接口
+        Object proxyInstance = Proxy.newProxyInstance(TestService.class.getClassLoader(),
+                testServiceImpl.getClass().getInterfaces(),
+                simplePrintMethodInvocationHandler);
+        //强制转换
+        TestService proxied = (TestService) proxyInstance;
+        //使用代理对象调用
+        proxied.test();
+
+        //创建 Feign 代理的 HTTP 调用接口实现
+        GitHub gitHub = Feign.builder()
+                //指定解码器未 FastJsonDecoder
+                .decoder(new FastJsonDecoder())
+                //指定代理类为 GitHub，基址为 https://api.github.com
+                .target(GitHub.class,"http://api.github.com");
+        List<GitHub.Contributor> contributors = gitHub.contributors("OpenFeign","feign");
+
+
+
+
 
     }
 

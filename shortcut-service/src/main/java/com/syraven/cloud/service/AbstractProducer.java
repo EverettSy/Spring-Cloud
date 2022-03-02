@@ -16,7 +16,7 @@ public abstract class AbstractProducer<T> {
     public static final AsyncEventBus eventBus = new AsyncEventBus("_event_async_",
             Executors.newFixedThreadPool(4));
 
-    public void registerAsyncEvent(EventConsumer consumer){
+    public void registerAsyncEvent(EventConsumer<T> consumer){
         eventBus.register(consumer);
     }
 

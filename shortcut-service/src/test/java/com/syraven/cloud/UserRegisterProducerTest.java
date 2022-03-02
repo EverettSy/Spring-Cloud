@@ -9,9 +9,6 @@ import com.syraven.cloud.service.Observer;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -23,9 +20,7 @@ import java.time.LocalDateTime;
  * @Date 2021-11-23 11:02 上午
  * @Version V1.0
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class UserRegisterProducerTest {
+public class UserRegisterProducerTest extends SpringTest {
 
     @Resource
     private UserRegisterProducer userRegisterProducer;

@@ -1,9 +1,8 @@
 package com.syraven.cloud;
 
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.apache.commons.lang3.SystemUtils;
 
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
 /**
@@ -13,9 +12,7 @@ import java.util.function.Predicate;
  * @Date 2021-11-16 5:33 下午
  * @Version V1.0
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class StreamTest {
+public class StreamTest extends SpringTest {
 
     /*public static void main(String[] args) {
         List<User> users = Lists.newArrayList();
@@ -76,6 +73,30 @@ public class StreamTest {
             return String.valueOf(n).contains("7");
         };
         foo(100, p1);*/
+
+        /*int x = 121;
+        boolean result = isPalindrome(x);
+        System.out.println(result);*/
+        String initialReference = "initial value referenced";
+        AtomicReference<String> atomicStringReference = new AtomicReference<>(initialReference);
+
+        String newReference = "new value referenced";
+        boolean exchanged = atomicStringReference.compareAndSet(initialReference,newReference);
+        System.out.println("exchanged:"+ exchanged);
+        System.out.println("newReference: "+ newReference);
+        System.out.println("initialReference: "+ initialReference);
+        System.out.println("atomicStringReference: " +atomicStringReference.get());
+
+        exchanged = atomicStringReference.compareAndSet(initialReference,newReference);
+        System.out.println("exchanged:"+ exchanged);
+
+        System.out.println("atomicStringReference: " +atomicStringReference.get());
+
+        System.out.println(SystemUtils.getJavaHome());
+
+
+
+
     }
 
 
@@ -84,6 +105,19 @@ public class StreamTest {
         if (n % 3 == 0) return true;
         return String.valueOf(n).contains("7");
     }
+
+    public static boolean isPalindrome(int x) {
+        //思考：这里大家可以思考一下，为什么末尾为 0 就可以直接返回 false
+        if (x < 0 || (x % 10 == 0 && x != 0)) return false;
+        int revertedNumber = 0;
+        while (x > revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            x /= 10;
+        }
+        return x == revertedNumber || x == revertedNumber / 10;
+    }
+
+
 
 
 

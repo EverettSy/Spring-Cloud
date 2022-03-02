@@ -5,9 +5,6 @@ import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.TreeUtil;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -18,9 +15,7 @@ import java.util.List;
  * @Date 2021-11-19 3:54 下午
  * @Version V1.0
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TreeNodeTest {
+public class TreeNodeTest extends SpringTest {
 
     public static void main(String[] args) {
 

@@ -1,9 +1,5 @@
 package com.syraven.cloud;
 
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -17,9 +13,7 @@ import java.util.concurrent.Executors;
  * @Date 2021-11-23 11:02 上午
  * @Version V1.0
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class CompletableFutureTest {
+public class CompletableFutureTest extends SpringTest{
 
     public static void main(String[] args) throws ExecutionException,InterruptedException {
         CompletableFuture<String> future = new CompletableFuture<>();

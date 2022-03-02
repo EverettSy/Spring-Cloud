@@ -1,5 +1,6 @@
 package com.syraven.cloud.service.impl;
 
+import cn.monitor4all.logRecord.annotation.OperationLog;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.syraven.cloud.config.AsyncJob;
@@ -42,6 +43,7 @@ public class UrlConvertServiceImpl implements UrlConvertService {
      * @param url
      * @return
      */
+    @OperationLog(bizType = "convertUrl", bizId = "#url", msg = "#url")
     @Override
     public String convertUrl(String url) {
         Preconditions.checkArgument(Validator.checkUrl(url),

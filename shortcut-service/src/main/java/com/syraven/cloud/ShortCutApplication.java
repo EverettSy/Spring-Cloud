@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.syraven.cloud.utlis.JwtUtil;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -17,6 +18,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @EnableEurekaClient
 @SpringBootApplication
 //@ComponentScan(basePackages = {"com.syraven.cloud.*"})
+@MapperScan("com.syraven.cloud.*.mapper")
 public class ShortCutApplication {
 
     public static void main(String[] args) {

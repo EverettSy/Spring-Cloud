@@ -7,12 +7,12 @@ import com.spatial4j.core.context.SpatialContext;
 import com.spatial4j.core.distance.DistanceUtils;
 import com.spatial4j.core.io.GeohashUtils;
 import com.syraven.cloud.bo.UserGeohashBo;
-import com.syraven.cloud.domain.*;
-import com.syraven.cloud.service.UserGeohashService;
+import com.syraven.cloud.dao.UserGeohashMapper;
+import com.syraven.cloud.domain.CommonResult;
+import com.syraven.cloud.domain.UserGeohash;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,15 +30,15 @@ import java.util.stream.Stream;
  * @author Raven
  * @date 2019/11/7 22:14
  */
+@Slf4j
 @Api(tags = "基于位置服务")
 @RestController
 @RequestMapping("/lbs")
 public class LocationBasedController {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(LocationBasedController.class);
 
     @Autowired
-    private UserGeohashService userGeohashService;
+    private UserGeohashMapper userGeohashMapper;
 
     private SpatialContext spatialContext = SpatialContext.GEO;
 
@@ -47,7 +47,7 @@ public class LocationBasedController {
     public CommonResult<Boolean> add(@RequestBody UserGeohash userGeohash) {
         //默认精度12位
         String geoHashCode = GeohashUtils.encodeLatLon(userGeohash.getLatitude(), userGeohash.getLongitude());
-        userGeohashService.save(userGeohash.setGeoCode(geoHashCode).setCreateTime(LocalDateTime.now()));
+        userGeohashMapper.insert(userGeohash.setGeoCode(geoHashCode).setCreateTime(LocalDateTime.now()));
         return new CommonResult<>("操作成功", 200);
     }
 
@@ -59,7 +59,7 @@ public class LocationBasedController {
         Wrapper<UserGeohash> queryWrapper = new QueryWrapper<UserGeohash>().lambda()
                 .likeRight(UserGeohash::getGeoCode, geoHashCode);
         //2.匹配指定精度的geoHash码
-        List<UserGeohash> userGeohashList = userGeohashService.list(queryWrapper);
+        List<UserGeohash> userGeohashList = userGeohashMapper.selectList(queryWrapper);
         //3.过滤超出距离的
         userGeohashList = userGeohashList.stream().filter(a -> getDistance(a.getLongitude(), a.getLatitude(), userGeohashBo.getUserLng(), userGeohashBo.getUserLat()) <= userGeohashBo.getDistance())
                 .collect(Collectors.toList());
@@ -80,7 +80,7 @@ public class LocationBasedController {
                 queryWrapper.or().likeRight("geo_code", a.toBase32())
         );
         //2.匹配指定精度的geoHash码
-        List<UserGeohash> userGeohashList = userGeohashService.list(queryWrapper);
+        List<UserGeohash> userGeohashList = userGeohashMapper.selectList(queryWrapper);
         //3.过滤超出距离的
         userGeohashList = userGeohashList.stream().filter(a -> getDistance(a.getLongitude(), a.getLatitude(), userGeohashBo.getUserLng(), userGeohashBo.getUserLat()) <= userGeohashBo.getDistance())
                 .collect(Collectors.toList());

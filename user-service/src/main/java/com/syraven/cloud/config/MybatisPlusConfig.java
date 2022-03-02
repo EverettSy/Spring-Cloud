@@ -1,11 +1,12 @@
 package com.syraven.cloud.config;
 
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
-import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
-import com.syraven.cloud.props.TenantProperties;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import lombok.AllArgsConstructor;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author SyRAVEN
  * @since 2021-04-01 14:48
  */
-@Configuration
+//@Configuration
 @AllArgsConstructor
 @EnableTransactionManagement
 //引入外部配置文件
@@ -22,9 +23,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.syraven.cloud.**.mapper.**")
 public class MybatisPlusConfig {
 
-    private final TenantProperties tenantProperties;
+    //private final TenantProperties tenantProperties;
 
-    private final TenantLineInnerInterceptor tenantLineInnerInterceptor;
+    //private final TenantLineInnerInterceptor tenantLineInnerInterceptor;
 
     /**
      * 单页分页条数限制（默认无限制，参见插件#handlerLimit 方法）
@@ -33,5 +34,13 @@ public class MybatisPlusConfig {
 
     public ISqlInjector sqlInjector(){
         return null;
+    }
+
+    //分页插件
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        return interceptor;
     }
 }

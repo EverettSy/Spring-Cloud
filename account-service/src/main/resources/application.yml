@@ -1,0 +1,156 @@
+server:
+  port: 8206
+spring:
+  application:
+    name: account-service
+  main:
+    allow-bean-definition-overriding: true
+    main:
+      web-application-type: none
+  jackson:
+     date-format: yyyy-MM-dd HH:mm:ss
+     time-zone: GMT+8
+  datasource:
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/seata_pay?characterEncoding=utf8&serverTimezone=UTC
+    username: appuser
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5  # 初始化大小
+      min-idle: 5  # 最小
+      max-active: 100  # 最大
+      max-wait: 60000  # 配置获取连接等待超时的时间
+      time-between-eviction-runs-millis: 60000  # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000  # 指定一个空闲连接最少空闲多久后可被清除，单位是毫秒
+      validationQuery: select 'x'
+      test-while-idle: true  # 当连接空闲时，是否执行连接测试
+      test-on-borrow: false  # 当从连接池借用连接时，是否测试该连接
+      test-on-return: false  # 在连接归还到连接池时是否测试该连接
+      filters: config,wall,stat  # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      poolPreparedStatements: true # 打开PSCache，并且指定每个连接上PSCache的大小
+      maxPoolPreparedStatementPerConnectionSize: 20
+      maxOpenPreparedStatements: 20
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.slowSqlMillis=200;druid.stat.logSlowSql=true;config.decrypt=false
+      # 合并多个DruidDataSource的监控数据
+      #use-global-data-source-stat: true
+      #WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
+      web-stat-filter:
+        enabled: true #是否启用StatFilter默认值true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico
+        session-stat-enable: true
+        session-stat-max-count: 10
+      #StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
+      stat-view-servlet:
+        enabled: true #是否启用StatViewServlet默认值true
+        url-pattern: /druid/*
+        reset-enable: true
+        login-username: root
+        login-password: 123456
+  redis:
+    host: 47.97.166.67
+    port: 6379
+    password: 'sy199520'
+    timeout: 4000
+    database: 2
+    lettuce:
+      pool:
+        max-active: 200 #连接池最大连接数（使用负值表示没有限制）
+        max-idle: 20 #连接池中的最大空闲连接
+        min-idle: 5 #连接池中的最小空闲连接
+        # 这里在IDEA中显示红色错误，不用管，因为org.springframework.boot.autoconfigure.data.redis.RedisProperties.Pool.setMaxWait(Duration maxWait)
+        # 方法参数是Duration，IDEA无法识别，但是会自动注入成功
+        max-wait: 2000  # 当连接池耗尽时，抛出异常之前，连接分配被阻塞的时间，也就是连接池满后最长等待时间，负值表示无限期等待
+  #mongodb配置
+#  data:
+#    mongodb:
+#      uri: mongodb://chaoke:admin@192.168.0.157:27017/ck_dev
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui/index.html#/
+    #Eureka Client 发送心跳给 server 端的频率 默认30秒
+    lease-renewal-interval-in-seconds: 5
+    #Eureka Server 至上一次收到 client 的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则移除该 Instance。默认90秒
+    lease-expiration-duration-in-seconds: 5
+
+knife4j:
+  production: false
+  basic:
+    enable: true
+    username: admin
+    password: 123321
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.com.syraven.cloud.core.mybatis.xml
+  type-aliases-package: com.syraven.cloud.domain
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: NOT_NULL
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+      db-type: mysql
+      #刷新mapper 调试神器
+      refresh: true
+    # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 配置这些主要是将actuator相关接口暴露出来。
+management:
+  endpoint:
+    health:
+      show-details: always #显示健康详情
+    shutdown:
+      enabled: true # 开启shutdown端点访问
+  endpoints:
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: "*"
+
+
+# ===== 自定义swagger配置 ===== #
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description:
+  try-host: http://localhost:${server.port}
+
+
+# seata 配置
+
+seata:
+  tx-service-group: my_test_tx_group
+  service:
+    vgroup-mapping:
+      my_test_tx_group: seata-server # 此处配置对应Server端配置registry.eureka.application的值
+  registry:
+    type: eureka
+    eureka:
+      service-url: http://localhost:8001/eureka/
+      weight: 1

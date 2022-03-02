@@ -1,4 +1,4 @@
-package com.syraven.cloud.core.mybatis.injector.methods;
+package com.syrobin.cloud.mybatis.injector.methods;
 
 import com.baomidou.mybatisplus.core.enums.SqlMethod;
 

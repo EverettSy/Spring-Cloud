@@ -1,10 +1,9 @@
-package com.syraven.cloud.core.mybatis.interceptor;
+package com.syrobin.cloud.mybatis.interceptor;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.SystemClock;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.Interceptor;
@@ -15,6 +14,8 @@ import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.session.ResultHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -31,7 +32,6 @@ import java.util.Set;
  * @author hubin nieqiurong TaoYu
  * @since 2016-07-07
  */
-@Slf4j
 @Intercepts({
         @Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
         @Signature(type = StatementHandler.class, method = "update", args = Statement.class),
@@ -41,6 +41,8 @@ public class SqlLogInterceptor implements Interceptor {
     private static final String DRUID_POOLED_PREPARED_STATEMENT = "com.alibaba.druid.pool.DruidPooledPreparedStatement";
     private static final String T4C_PREPARED_STATEMENT = "oracle.jdbc.driver.T4CPreparedStatement";
     private static final String ORACLE_PREPARED_STATEMENT_WRAPPER = "oracle.jdbc.driver.OraclePreparedStatementWrapper";
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SqlLogInterceptor.class);
 
     private Method oracleGetOriginalSqlMethod;
     private Method druidGetSqlMethod;
@@ -135,7 +137,7 @@ public class SqlLogInterceptor implements Interceptor {
                 "\nExecute SQL ：{}" +
                 "\nExecute Time：{} ms" +
                 "\n==============  Sql  End   ==============\n";
-        log.info(sqlLogger, ms.getId(), originalSql, timing);
+        LOGGER.info(sqlLogger, ms.getId(), originalSql, timing);
         return result;
     }
 

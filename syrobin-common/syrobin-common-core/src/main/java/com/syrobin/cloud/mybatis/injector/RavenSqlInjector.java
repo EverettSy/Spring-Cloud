@@ -1,12 +1,12 @@
-package com.syraven.cloud.core.mybatis.injector;
+package com.syrobin.cloud.mybatis.injector;
 
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
-import com.syraven.cloud.core.mybatis.injector.methods.InsertBatch;
-import com.syraven.cloud.core.mybatis.injector.methods.InsertIgnore;
-import com.syraven.cloud.core.mybatis.injector.methods.InsertIgnoreBatch;
-import com.syraven.cloud.core.mybatis.injector.methods.Replace;
-import com.syraven.cloud.core.mybatis.injector.methods.ReplaceBatch;
+import com.syrobin.cloud.mybatis.injector.methods.InsertBatch;
+import com.syrobin.cloud.mybatis.injector.methods.InsertIgnore;
+import com.syrobin.cloud.mybatis.injector.methods.InsertIgnoreBatch;
+import com.syrobin.cloud.mybatis.injector.methods.Replace;
+import com.syrobin.cloud.mybatis.injector.methods.ReplaceBatch;
 
 import java.util.ArrayList;
 import java.util.Collections;

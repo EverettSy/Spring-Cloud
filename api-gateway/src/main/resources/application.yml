@@ -1,0 +1,56 @@
+server:
+  port: 8181
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      httpclient:
+        # 网关转发其他微服务的HTTP 连接超时为 500ms
+        connect-timeout: 500
+        # 网关转发其他微服务的HTTP 响应超时为 6000ms
+        response-timeout: 6000
+      routes:
+        # 编写转发规则
+        - id: shortcut
+          # 转发到微服务 shortcut-service
+          uri: lb://shortcut-service
+          # 路由条件（包含哪些路径）
+          predicates:
+            - Path=/shortcut/**
+          #过滤规则。 StripPrefix=1标识去掉url的第一个前缀，即去掉/shortcut
+          filters:
+            - StripPrefix=1
+#      loadbalancer:
+#        # 指定 zone，因为我们之前在负载均衡中加入了只有同一个 zone 的实例才能互相访问的逻辑
+#        zone: test
+#        # 关闭ribbon
+#        ribbon:
+#          enabled: false
+#        cache:
+#          # 本地微服务实例列表缓存时间
+#          ttl: 5
+#          # 缓存大小，你的微服务调用多少个其他微服务，大小就设置为多少，默认256
+#          capacity: 256
+#      discovery:
+#        client:
+#          simple:
+#            # 使用 spring-common 中的简单 DiscoveryClient 服务发现客户端，就是将微服务实例写死在配置文件中
+#            instances:
+#              # 指定微服务 test-service 的实例列表
+#              test-service:
+#                - host: httpbin.org
+#                  port: 80
+#                  metadata:
+#                    # 指定该实例的 zone，因为我们之前在负载均衡中加入了只有同一个 zone 的实例才能互相访问的逻辑
+#                    zone: test
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+
+

@@ -4,7 +4,7 @@ import com.syraven.cloud.domain.Validator;
 import com.syraven.cloud.util.SM3Util;
 import com.syraven.cloud.util.SM4Util;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections4.MapUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;

@@ -1,6 +1,8 @@
 package com.syraven.cloud;
 
 import org.apache.commons.lang3.SystemUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
@@ -50,6 +52,9 @@ public class StreamTest extends SpringTest {
 
 
     }*/
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     public static void foo(int x, Predicate<Integer> condition) {
         for (int i = 1; i < x; i++) {
@@ -116,6 +121,9 @@ public class StreamTest extends SpringTest {
         }
         return x == revertedNumber || x == revertedNumber / 10;
     }
+
+
+
 
 
 

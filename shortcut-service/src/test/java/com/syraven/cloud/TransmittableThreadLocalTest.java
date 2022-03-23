@@ -88,6 +88,5 @@ public class TransmittableThreadLocalTest {
         });
         countDownLatch4.await();
         executorService.shutdown();
-
     }
 }

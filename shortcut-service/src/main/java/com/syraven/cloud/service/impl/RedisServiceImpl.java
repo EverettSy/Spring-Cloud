@@ -4,7 +4,9 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Maps;
+import com.syraven.cloud.domin.User;
 import com.syraven.cloud.service.RedisService;
+import com.syraven.cloud.utlis.KryoUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.RedisServerCommands;
@@ -58,5 +60,21 @@ public class RedisServiceImpl implements RedisService {
         });
         result.put("commandStats", pieList);
         return result;
+    }
+
+    public String UserInfo(){
+        User user = User.builder()
+                .username("张三")
+                .age(12)
+                .id(12)
+                .password("123456")
+                .build();
+
+        String userInfoRedis = KryoUtil.writeToString(user);
+        redisTemplate.opsForValue().set("user",userInfoRedis);
+        return userInfoRedis;
+
+
+
     }
 }

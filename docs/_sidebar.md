@@ -7,6 +7,7 @@
   * [Spring Cloud系列之组件介绍](architecture/Spring%20Cloud系列之组件介绍.md)
   * [Spring Cloud系列之OpenFeign组件](architecture/Spring%20Cloud系列之OpenFeign组件.md)
   * [Spring Cloud系列之OpenFeign的生命周期-创建代理](architecture/Spring%20Cloud系列之OpenFeign的生命周期-创建代理.md)
+  * [Spring Cloud系列之LoadBalancer简介](architecture/Spring%20Cloud系列之LoadBalancer简介.md)
   
 * 业务篇
 

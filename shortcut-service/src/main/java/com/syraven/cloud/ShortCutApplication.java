@@ -1,5 +1,6 @@
 package com.syraven.cloud;
 
+import cn.hippo4j.core.enable.EnableDynamicThreadPool;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -15,6 +16,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 /**
  * @author YuSong
  */
+@EnableDynamicThreadPool
 @EnableKafka
 @EnableOpenApi
 @EnableEurekaClient

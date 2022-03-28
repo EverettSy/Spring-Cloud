@@ -25,8 +25,9 @@
 
     <properties>
         <spring-boot-admin.version>2.4.2</spring-boot-admin.version>
-        <spring-cloud.version>2020.0.3</spring-cloud.version>
-        <openfeign.version>3.0.3</openfeign.version>
+        <spring-cloud.version>2020.0.1</spring-cloud.version>
+        <alibaba-cloud.version>2021.1</alibaba-cloud.version>
+        <openfeign.version>3.1.1</openfeign.version>
         <netflix-eureka-client>3.0.2</netflix-eureka-client>
         <redisson-version>3.16.4</redisson-version>
         <hutool.version>5.7.16</hutool.version>
@@ -202,7 +203,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
-            <version>0.2.0</version>
+            <version>0.2.3</version>
         </dependency>
 
         <!--提供 form 认证-->
@@ -266,6 +267,26 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
+        <!-- Nacos配置中心-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>-->
+        <!-- 动态线程池-->
+        <dependency>
+            <groupId>cn.hippo4j</groupId>
+            <artifactId>hippo4j-core-spring-boot-starter</artifactId>
+            <version>1.2.0-alpha</version>
+        </dependency>
+        <!--bootstrap 启动器-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
 
 
     </dependencies>
@@ -276,6 +297,13 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${alibaba-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

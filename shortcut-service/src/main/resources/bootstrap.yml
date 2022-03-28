@@ -1,0 +1,27 @@
+server:
+  port: 8202
+spring:
+  application:
+    name: shortcut-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 47.97.166.67:8848 #Nacos 地址
+        namespace: a5906467-da67-4b02-bd8b-5135bb755529 #命名空间
+        group: DEFAULT_GROUP  #分组
+        file-extension: yaml  # dataid 的名称就是application的name加file-extension
+        shared-configs:  # 共享配置
+          - data-id: common.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+        extension-configs: # 拓展配置
+          # hippo4j 动态线程池
+          - data-id: hippo4j-nacos.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+          # seata
+          - data-id: seata.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+
+

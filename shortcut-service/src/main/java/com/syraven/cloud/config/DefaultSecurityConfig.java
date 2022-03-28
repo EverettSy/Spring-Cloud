@@ -40,6 +40,12 @@ public class DefaultSecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 
+    /**
+     * 定义 spring security 拦击链规则
+     * @param http
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config
@@ -49,11 +55,10 @@ public class DefaultSecurityConfig {
                 .and()
                 .authorizeRequests();
         //忽略验证地址
-        ignoreUrlPropsConfig.getIgnoreUrls().forEach(url ->
-                config.antMatchers(url).permitAll());
-        http.authorizeRequests(authorizeRequests ->
+        http.authorizeRequests(authorizeRequests -> ignoreUrlPropsConfig.getIgnoreUrls().forEach(url ->
                         //任何请求都需要身份认证
-                        authorizeRequests.anyRequest().authenticated())
+                        authorizeRequests.antMatchers(url).permitAll())
+                )
                 .formLogin(Customizer.withDefaults())
                 //csrf跨站请求
                 .csrf().disable();

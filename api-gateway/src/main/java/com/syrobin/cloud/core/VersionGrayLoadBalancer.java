@@ -1,4 +1,4 @@
-package com.syrobin.cloud.rule;
+package com.syrobin.cloud.core;
 
 import com.alibaba.nacos.api.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -31,11 +31,10 @@ import java.util.stream.Collectors;
 @Slf4j
 public class VersionGrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 
+    final String serviceId;
+    final AtomicInteger position;
+    ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider;
 
-
-    private final ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider;
-    private final String serviceId;
-    private final AtomicInteger position;
 
     public VersionGrayLoadBalancer(ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider,
                                    String serviceId) {
@@ -56,8 +55,11 @@ public class VersionGrayLoadBalancer implements ReactorServiceInstanceLoadBalanc
         //获取服务实例列表
         ServiceInstanceListSupplier supplier =
                 this.serviceInstanceListSupplierProvider.getIfAvailable(NoopServiceInstanceListSupplier::new);
-
-        return supplier.get(request).next().map(serviceInstances -> processInstanceResponse(serviceInstances, request));
+        return supplier
+                .get(request)
+                .next()
+                // 从列表中选择一个实例
+                .map(serviceInstances -> processInstanceResponse(serviceInstances, request));
     }
 
     private Response<ServiceInstance> processInstanceResponse(List<ServiceInstance> instances, Request request) {

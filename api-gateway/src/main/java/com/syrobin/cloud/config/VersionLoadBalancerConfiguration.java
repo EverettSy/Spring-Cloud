@@ -1,6 +1,6 @@
 package com.syrobin.cloud.config;
 
-import com.syrobin.cloud.rule.VersionGrayLoadBalancer;
+import com.syrobin.cloud.core.VersionGrayLoadBalancer;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.loadbalancer.core.ReactorLoadBalancer;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;

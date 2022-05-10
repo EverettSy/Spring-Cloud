@@ -23,5 +23,6 @@
 * 工具篇
   * [RestTemplate 使用简介](tools/restTemplate.md)
   * [docker日志命令](tools/docker日志命令.md)
+  * [Elasticsearch官方已支持SQL查询，用起来贼方便！](tools/Elasticsearch使用SQL查询.md)
 * 读书笔记
   * [Raft分布式协议](notes/Raft分布式协议.md)

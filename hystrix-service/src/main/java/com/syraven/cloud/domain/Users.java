@@ -2,6 +2,7 @@ package com.syraven.cloud.domain;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -12,11 +13,12 @@ import lombok.ToString;
  * @author Raven
  * @date 2019/11/7 22:10
  */
+@Builder
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Users {
 
     @ApiModelProperty("id")
     private Integer id;

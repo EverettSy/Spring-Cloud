@@ -4,7 +4,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheRemove;
 import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheResult;
 import com.syraven.cloud.domain.CommonResult;
-import com.syraven.cloud.domain.User;
+import com.syraven.cloud.domain.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +35,8 @@ public class UserService {
     }
 
     public CommonResult getDefaultUser(Integer id){
-        User defaultUser = new User(1,"defaultUser","123456");
-        return new CommonResult<>(defaultUser);
+        Users defaultUsers = Users.builder().id(2).username("defaultUser").password("123456").build();
+        return new CommonResult<>(defaultUsers);
     }
 
     @HystrixCommand(fallbackMethod = "getDefaultUser2",ignoreExceptions = {NullPointerException.class})
@@ -51,8 +51,8 @@ public class UserService {
 
     public CommonResult getDefaultUser2(@PathVariable Integer id,Throwable e){
         logger.error("getDefaultUser2 id:{},throwable class:{}",id,e.getClass());
-        User defaultUser = new User(2,"defaultUser2","123456");
-        return new CommonResult<>(defaultUser);
+        Users defaultUsers = Users.builder().id(2).username("defaultUser").password("123456").build();
+        return new CommonResult<>(defaultUsers);
     }
 
     /**

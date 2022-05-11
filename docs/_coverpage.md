@@ -1,5 +1,5 @@
 <!-- 封面 -->
-![logo](https://cdn.jsdelivr.net/gh/EverettSy/ImageBed@master/uPic/pexels-aleksandar-pasaric-325185.jpeg)
+![logo](https://cdn.jsdelivr.net/gh/EverettSy/ImageBed@master/uPic/clip-1043.png ':size=100')
 
 # Syrobin Cloud <small>1.0</small>
 

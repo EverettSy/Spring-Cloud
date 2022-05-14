@@ -2,7 +2,7 @@ package com.syraven.cloud.config;
 
 import com.syraven.cloud.common.enums.ResultCodeEnum;
 import com.syraven.cloud.common.exception.ShortCutException;
-import com.syraven.cloud.utlis.CommonResult;
+import com.syraven.cloud.record.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.BufferedImageHttpMessageConverter;
@@ -11,6 +11,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -98,4 +99,15 @@ public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> ex
         }
     }
     // ------------------ private 方法结束
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowCredentials(true)
+                .maxAge(3600)
+                .allowedHeaders("*");
+    }
 }

@@ -15,13 +15,37 @@ spring:
             group: DEFAULT_GROUP
             refresh: true
         extension-configs: # 拓展配置
+          # 短链服务配置
+          - data-id: shortcut-service.yaml
+            group: DEFAULT_GROUP
+            refresh: true
           # hippo4j 动态线程池
           - data-id: hippo4j-nacos.yaml
             group: DEFAULT_GROUP
             refresh: true
-          # seata
-          - data-id: seata.yaml
+#          # seata 配置
+#          - data-id: seata.yaml
+#            group: DEFAULT_GROUP
+#            refresh: true
+          # kafka 配置
+#          - data-id: kafka.yaml
+#            group: DEFAULT_GROUP
+#            refresh: true
+          # mybatis-plus 配置
+          - data-id: mybatis-plus.yaml
             group: DEFAULT_GROUP
             refresh: true
 
-
+management:
+  endpoint:
+    health:
+      show-details: always #显示健康详情
+    shutdown:
+      enabled: true # 开启shutdown端点访问
+  endpoints:
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: "*"

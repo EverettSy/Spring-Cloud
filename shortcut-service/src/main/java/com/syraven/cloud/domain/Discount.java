@@ -1,9 +1,9 @@
-package com.syraven.cloud.domin;
+package com.syraven.cloud.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static com.syraven.cloud.domin.Shop.delay;
+import static com.syraven.cloud.domain.Shop.delay;
 
 /**
  * @author syrobin

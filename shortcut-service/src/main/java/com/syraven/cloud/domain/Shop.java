@@ -1,4 +1,4 @@
-package com.syraven.cloud.domin;
+package com.syraven.cloud.domain;
 
 import com.google.common.collect.Lists;
 import org.jetbrains.annotations.NotNull;

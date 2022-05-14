@@ -1,7 +1,9 @@
 package com.syraven.cloud.controller;
 
+import com.syraven.cloud.record.CommonResult;
 import com.syraven.cloud.service.RedisService;
-import com.syraven.cloud.utlis.CommonResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/redis")
+@Api(tags = "Redis")
 public class RedisController {
 
     private  final RedisService redisService;
 
+    @ApiOperation(value = "获取Redis的运行信息",httpMethod = "GET")
     @GetMapping("/info")
     public CommonResult memory(){
         return CommonResult.success(redisService.getInfo());

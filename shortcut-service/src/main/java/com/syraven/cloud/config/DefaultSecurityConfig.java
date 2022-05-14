@@ -2,15 +2,15 @@ package com.syraven.cloud.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * @ClassName: DefaultSecurityConfig
@@ -47,21 +47,39 @@ public class DefaultSecurityConfig {
      * @throws Exception
      */
     @Bean
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config
-                = http.requestMatchers().anyRequest()
-                .and()
-                .formLogin()
-                .and()
-                .authorizeRequests();
-        //忽略验证地址
-        http.authorizeRequests(authorizeRequests -> ignoreUrlPropsConfig.getIgnoreUrls().forEach(url ->
-                        //任何请求都需要身份认证
-                        authorizeRequests.antMatchers(url).permitAll())
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests(authorizeRequests -> authorizeRequests
+                        .mvcMatchers("/auth/*").authenticated()
                 )
-                .formLogin(Customizer.withDefaults())
-                //csrf跨站请求
-                .csrf().disable();
+                .csrf().disable()
+                .formLogin(withDefaults());
         return http.build();
+
     }
+
+    private static final String[] SECURITY_ENDPOINTS = {
+            "/auth/**",
+            "/oauth/**",
+            "/actuator/**",
+            "/v2/api-docs/**",
+            "/swagger/api-docs",
+            "/swagger-ui.html",
+            "/doc.html",
+            "/swagger-resources/**",
+            "/webjars/**",
+            "/druid/**",
+            "/error/**",
+            "/assets/**",
+            "/auth/logout",
+            "/auth/code",
+            "/auth/sms-code",
+            "/short/**",
+            "/app/gonggao/chat/**",
+            "/endpoint-websocket/**",
+            "/topic/game_chat/**",
+            "/gonggao/**"
+
+    };
+
 }

@@ -1,7 +1,7 @@
 package com.syraven.cloud.common.exception;
 
 import com.syraven.cloud.common.enums.ResultCodeEnum;
-import com.syraven.cloud.utlis.CommonResult;
+import com.syraven.cloud.record.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.BindException;

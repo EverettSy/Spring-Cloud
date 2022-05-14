@@ -1,4 +1,4 @@
-package com.syraven.cloud.domin;
+package com.syraven.cloud.domain;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "用户实体",description = "用户实体")
-public class User implements Serializable {
+public class UserRoot implements Serializable {
 
     private Integer id;
     private String username;

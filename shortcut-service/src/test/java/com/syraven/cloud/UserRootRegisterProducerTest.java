@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  * @Date 2021-11-23 11:02 上午
  * @Version V1.0
  */
-public class UserRegisterProducerTest extends SpringTest {
+public class UserRootRegisterProducerTest extends SpringTest {
 
     @Resource
     private UserRegisterProducer userRegisterProducer;

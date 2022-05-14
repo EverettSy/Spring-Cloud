@@ -2,7 +2,7 @@ package com.syraven.cloud.controller;
 
 import com.syraven.cloud.config.ServerInitConfiguration;
 import com.syraven.cloud.service.UrlConvertService;
-import com.syraven.cloud.utlis.CommonResult;
+import com.syraven.cloud.record.CommonResult;
 import com.syraven.cloud.utlis.QRcodeUtils;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.syraven.cloud.utlis;
+package com.syraven.cloud.record;
 
 import com.alibaba.fastjson.JSON;
 import com.syraven.cloud.common.enums.ResultCodeEnum;

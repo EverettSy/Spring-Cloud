@@ -1,4 +1,4 @@
-package com.syraven.cloud.domin;
+package com.syraven.cloud.domain;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

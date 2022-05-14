@@ -1,17 +1,15 @@
 spring:
   main:
     allow-bean-definition-overriding: true
-# 配置这些主要是将actuator相关接口暴露出来。
-management:
-  endpoint:
-    health:
-      show-details: always #显示健康详情
-    shutdown:
-      enabled: true # 开启shutdown端点访问
-  endpoints:
-    jmx:
-      exposure:
-        exclude: "*"
-    web:
-      exposure:
-        include: "*"
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+# ===== 自定义swagger配置 ===== #
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description:
+  try-host: http://localhost:${server.port}

@@ -2,12 +2,17 @@ package com.syraven.cloud.controller;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.alibaba.ttl.TtlRunnable;
+import com.syraven.cloud.common.enums.Colors;
+import com.syraven.cloud.common.validation.advice.Color;
 import com.syraven.cloud.spring.context.bean.ChildBean;
+import com.syraven.cloud.record.Rest;
+import com.syraven.cloud.record.RestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -91,6 +96,12 @@ public class TestController {
             LinkedHashMap<Integer, Integer> linkedHashMap = new LinkedHashMap<>();
             transmittableThreadLocal2.set(linkedHashMap);
         }
+    }
+
+
+    @GetMapping("/color")
+    public Rest<?> color(@Valid @Color({Colors.BLUE, Colors.YELLOW}) String color) {
+        return RestBody.okData(color);
     }
 
 }

@@ -1,11 +1,7 @@
 package com.syraven.cloud.consumer;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 /**
  * @author syrobin
@@ -17,7 +13,7 @@ import java.util.Optional;
 @Slf4j
 public class UserLogConsumer {
 
-    @KafkaListener(topics = {"sycloud"}, groupId = "sycloudGroup1")
+    /*@KafkaListener(topics = {"sycloud"}, groupId = "sycloudGroup1")
     public void consumer(ConsumerRecord<?, ?> consumerRecord) {
 
         Optional<?> kafkaMessage = Optional.ofNullable(consumerRecord.value());
@@ -27,5 +23,5 @@ public class UserLogConsumer {
             Object message = kafkaMessage.get();
             System.err.println("消费消息"+message);
         }
-    }
+    }*/
 }

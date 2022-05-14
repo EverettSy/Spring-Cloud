@@ -11,8 +11,6 @@ import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,7 +19,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -58,9 +55,9 @@ import java.util.UUID;
  * @Date 2021-08-30 4:16 下午
  * @Version V1.0
  */
-@Configuration
-@EnableWebSecurity
-@Import(OAuth2AuthorizationServerConfiguration.class)
+//@Configuration
+//@EnableWebSecurity
+//@Import(OAuth2AuthorizationServerConfiguration.class)
 public class AuthServerConfiguration {
 
     // security 挂载 SAS 【最重要的一步】

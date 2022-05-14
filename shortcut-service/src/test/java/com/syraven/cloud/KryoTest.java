@@ -1,6 +1,6 @@
 package com.syraven.cloud;
 
-import com.syraven.cloud.domin.User;
+import com.syraven.cloud.domain.UserRoot;
 import com.syraven.cloud.utlis.KryoUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,26 +17,26 @@ public class KryoTest extends SpringTest {
     @Test
     @DisplayName("Kryo")
     public void userInfo(){
-        User user = User.builder()
+        UserRoot userRoot = UserRoot.builder()
                 .username("张三")
                 .age(12)
                 .id(12)
                 .password("123456")
                 .build();
 
-        byte[] tempByteArray = KryoUtil.writeToByteArray(user);
+        byte[] tempByteArray = KryoUtil.writeToByteArray(userRoot);
         //tempByteArray 就是序列化的结果，直接放到 Redis 里面即可
         System.out.println(tempByteArray);
 
-        User user1 = KryoUtil.readFromByteArray(tempByteArray);
+        UserRoot userRoot1 = KryoUtil.readFromByteArray(tempByteArray);
         //user1 就是反序列化之后的对象
         //如果你们的存储服务不支持二进制数据（或者说不是 “二进制安全” 的），那么也可以序列化成 String：
-        String tempStr = KryoUtil.writeToString(user);
+        String tempStr = KryoUtil.writeToString(userRoot);
         System.out.println(tempStr);
         //tempStr 就是序列化的结果
-        User domainA1 = KryoUtil.readFromString(tempStr);
+        UserRoot domainA1 = KryoUtil.readFromString(tempStr);
         //domainA1 就是反序列化之后的对象
-        Assert.assertEquals(user,domainA1);
+        Assert.assertEquals(userRoot,domainA1);
 
 
 

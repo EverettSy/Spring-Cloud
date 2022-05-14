@@ -9,7 +9,9 @@ import com.syraven.cloud.service.UrlConvertService;
 import com.syraven.cloud.utlis.NumericConvertUtils;
 import com.syraven.cloud.utlis.SnowFlake;
 import com.syraven.cloud.utlis.Validator;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,7 @@ import javax.annotation.Resource;
  **/
 @Slf4j
 @Service
+@Setter(onMethod_ = {@Autowired})
 public class UrlConvertServiceImpl implements UrlConvertService {
 
     @Resource

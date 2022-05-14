@@ -4,7 +4,7 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Maps;
-import com.syraven.cloud.domin.User;
+import com.syraven.cloud.domain.UserRoot;
 import com.syraven.cloud.service.RedisService;
 import com.syraven.cloud.utlis.KryoUtil;
 import lombok.AllArgsConstructor;
@@ -63,14 +63,14 @@ public class RedisServiceImpl implements RedisService {
     }
 
     public String UserInfo(){
-        User user = User.builder()
+        UserRoot userRoot = UserRoot.builder()
                 .username("张三")
                 .age(12)
                 .id(12)
                 .password("123456")
                 .build();
 
-        String userInfoRedis = KryoUtil.writeToString(user);
+        String userInfoRedis = KryoUtil.writeToString(userRoot);
         redisTemplate.opsForValue().set("user",userInfoRedis);
         return userInfoRedis;
 

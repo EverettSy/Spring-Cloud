@@ -1,4 +1,4 @@
-package com.syraven.cloud.domin;
+package com.syraven.cloud.domain;
 
 import com.syraven.cloud.service.ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;

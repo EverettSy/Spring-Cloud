@@ -1,6 +1,6 @@
 package com.syraven.cloud;
 
-import com.syraven.cloud.domin.User;
+import com.syraven.cloud.domain.UserRoot;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
@@ -19,14 +19,14 @@ public class OptionalTest extends SpringTest {
 
     @Test(expected = NoSuchElementException.class)
     public void whenCreateEmptyOptional_thenNull() {
-        Optional<User> emptyOpt = Optional.empty();
+        Optional<UserRoot> emptyOpt = Optional.empty();
         emptyOpt.get();
     }
 
     @Test(expected = NullPointerException.class)
     public void whenCreateOfEmptyOptional_thenNullPointerException() {
-        User user = new User();
-        Optional<User> opt = Optional.of(user);
+        UserRoot userRoot = new UserRoot();
+        Optional<UserRoot> opt = Optional.of(userRoot);
     }
 
     //访问 Optional 对象的值
@@ -40,12 +40,12 @@ public class OptionalTest extends SpringTest {
 
     @Test
     public void whenCheckIfPresent_thenOk() {
-        User user = new User(1,"john@gmail.com", "1234",1,1);
-        Optional<User> opt = Optional.ofNullable(user);
+        UserRoot userRoot = new UserRoot(1,"john@gmail.com", "1234",1,1);
+        Optional<UserRoot> opt = Optional.ofNullable(userRoot);
         assertTrue(opt.isPresent());
-        opt.ifPresent(u -> assertEquals(user.getUsername(), opt.get().getUsername()));
+        opt.ifPresent(u -> assertEquals(userRoot.getUsername(), opt.get().getUsername()));
 
-        assertEquals(user.getUsername(), opt.get().getUsername());
+        assertEquals(userRoot.getUsername(), opt.get().getUsername());
 
 
     }
@@ -53,20 +53,20 @@ public class OptionalTest extends SpringTest {
 
     @Test
     public void whenEmptyValue_thenReturnDefault() {
-        User user = null;
-        User user2 = new User(1,"john@gmail.com", "1234",1,1);
-        User result = Optional.ofNullable(user).orElse(user2);
+        UserRoot userRoot = null;
+        UserRoot userRoot2 = new UserRoot(1,"john@gmail.com", "1234",1,1);
+        UserRoot result = Optional.ofNullable(userRoot).orElse(userRoot2);
 
-        assertEquals(user.getUsername(), result.getUsername());
+        assertEquals(userRoot.getUsername(), result.getUsername());
     }
 
     @Test
     public void whenValueNotNull_thenIgnoreDefault() {
-        User user = new User(1,null, "1234",1,1);
-        User user2 = new User(1,"anna@gmail.com", "1234",1,1);
-        User result = Optional.ofNullable(user).orElse(user2);
+        UserRoot userRoot = new UserRoot(1,null, "1234",1,1);
+        UserRoot userRoot2 = new UserRoot(1,"anna@gmail.com", "1234",1,1);
+        UserRoot result = Optional.ofNullable(userRoot).orElse(userRoot2);
 
-        User result2 = Optional.ofNullable(user).orElseGet( () -> user2);
+        UserRoot result2 = Optional.ofNullable(userRoot).orElseGet( () -> userRoot2);
 
         assertEquals(null, result.getUsername());
     }

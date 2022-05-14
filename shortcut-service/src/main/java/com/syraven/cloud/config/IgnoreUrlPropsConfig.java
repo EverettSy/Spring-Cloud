@@ -39,7 +39,11 @@ public class IgnoreUrlPropsConfig {
             "/auth/logout",
             "/auth/code",
             "/auth/sms-code",
-            "/short/**"
+            "/short/**",
+            "/app/gonggao/chat/**",
+            "/endpoint-websocket/**",
+            "/topic/game_chat/**",
+            "/gonggao/**"
 
     };
 

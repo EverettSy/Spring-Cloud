@@ -10,15 +10,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.kafka.annotation.EnableKafka;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * @author YuSong
  */
+
 @EnableDynamicThreadPool
-@EnableKafka
-@EnableOpenApi
 @EnableEurekaClient
 @SpringBootApplication
 //@ComponentScan(basePackages = {"com.syraven.cloud.*"})

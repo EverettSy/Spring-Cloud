@@ -3,6 +3,41 @@ server:
 spring:
   application:
     name: eureka-client #服务名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.97.166.67:8848
+        namespace: a5906467-da67-4b02-bd8b-5135bb755529 #命名空间
+      config:
+        server-addr: 47.97.166.67:8848 #Nacos 地址
+        namespace: a5906467-da67-4b02-bd8b-5135bb755529 #命名空间
+        group: DEFAULT_GROUP  #分组
+        file-extension: yaml  # dataid 的名称就是application的name加file-extension
+        shared-configs: # 共享配置
+          - data-id: common.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+        extension-configs: # 拓展配置
+          # 短链服务配置
+          - data-id: shortcut-service.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+          # hippo4j 动态线程池
+          - data-id: hippo4j-nacos.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+          #          # seata 配置
+          #          - data-id: seata.yaml
+          #            group: DEFAULT_GROUP
+          #            refresh: true
+          # kafka 配置
+          #          - data-id: kafka.yaml
+          #            group: DEFAULT_GROUP
+          #            refresh: true
+          # mybatis-plus 配置
+          - data-id: mybatis-plus.yaml
+            group: DEFAULT_GROUP
+            refresh: true
 eureka:
   client:
     register-with-eureka: true #注册到Eureka的注册中心

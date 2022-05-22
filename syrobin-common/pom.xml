@@ -11,9 +11,10 @@
     </parent>
 
     <artifactId>syrobin-common</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <description>syrobin 公共聚合模块</description>
+    <description>公共聚合模块</description>
 
     <modules>
         <module>syrobin-common-oss</module>
@@ -23,9 +24,7 @@
 
 
     <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <guava.version>31.1-jre</guava.version>
         <skipTests>true</skipTests>
     </properties>
 
@@ -35,36 +34,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>30.1.1-jre</version>
+            <version>${guava.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.61</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.0</version>
-        </dependency>
-        <!--mybatis plus extension,包含了mybatis plus core-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-extension</artifactId>
-            <version>3.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.4.0</version>
-        </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

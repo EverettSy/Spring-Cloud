@@ -9,11 +9,14 @@
         <groupId>com.syrobin.cloud</groupId>
         <version>1.0.0</version>
     </parent>
+    <properties>
+        <aws.version>1.12.220</aws.version>
+    </properties>
 
     <artifactId>syrobin-common-oss</artifactId>
     <packaging>jar</packaging>
 
-    <description> syrobin 文件系统依赖</description>
+    <description>oss 组件</description>
 
     <dependencies>
         <dependency>

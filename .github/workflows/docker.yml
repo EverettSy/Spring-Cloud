@@ -19,6 +19,7 @@ jobs:
     - name: Build the Docker image # 步骤名字
       run: |
         docker login --username=${{ secrets.DOCKER_USER_NAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_ACCESS_TOKEN }} # 登录docker，并使用Secret里配置的参数
+        cd shortcut-service
         docker build -t short-service:latest . #执行构建
         docker tag short-service registry.cn-hangzhou.aliyuncs.com/syrobin/short-service # 
         docker push registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:latest # 推送        

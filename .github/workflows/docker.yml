@@ -7,10 +7,10 @@ jobs:
   build: # 一个名叫build的任务（名字可以随便起）
     runs-on: ubuntu-latest # 基于最新版Ubuntu系统执行下列任务
     steps:
-    - uses: actions/checkout@v2 # 将仓库内容拷贝到Ubuntu系统的虚拟环境
+    - uses: actions/checkout@v3 # 将仓库内容拷贝到Ubuntu系统的虚拟环境
     - name: Build the Docker image # 步骤名字
       run: |
-        cd /shortcut-service
+        ./shortcut-service
         docker login --username=${{ secrets.DOCKER_USER_NAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_ACCESS_TOKEN }} # 登录docker，并使用Secret里配置的参数
         docker build -t short-service:latest . #执行构建
         docker tag short-service registry.cn-hangzhou.aliyuncs.com/syrobin/short-service # 

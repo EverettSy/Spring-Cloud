@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3 # 将仓库内容拷贝到Ubuntu系统的虚拟环境
 
-    - name: Use Short Service # 执行的命令
+    - name: Use Short Service # 切换目录
       run: |
         cd shortcut-service
     - name: Build the Docker image # 步骤名字

@@ -1,10 +1,10 @@
 FROM moxm/java:1.8-full
 
-RUN mkdir -p /short-service
+RUN mkdir -p /shortcut-service
 
-WORKDIR /short-service
+WORKDIR /shortcut-service
 
-ARG JAR_FILE=target/short-service.jar
+ARG JAR_FILE=target/shortcut-service.jar
 
 COPY ${JAR_FILE} app.jar
 

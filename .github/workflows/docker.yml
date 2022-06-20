@@ -13,13 +13,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3 # 将仓库内容拷贝到Ubuntu系统的虚拟环境
 
-    - name: Use Short Service # 执行的命令
+    - name: Use Short Service # 切换目录
       run: |
         cd shortcut-service
     - name: Build the Docker image # 步骤名字
       run: |
         docker login --username=${{ secrets.DOCKER_USER_NAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_ACCESS_TOKEN }} # 登录docker，并使用Secret里配置的参数
         cd shortcut-service
-        docker build -t short-service:latest . #执行构建
-        docker tag short-service registry.cn-hangzhou.aliyuncs.com/syrobin/short-service # 
-        docker push registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:latest # 推送        
+        docker build -t shortcut-service:latest . #执行构建
+        docker tag shortcut-service registry.cn-hangzhou.aliyuncs.com/syrobin/shortcut-service # tag
+        docker push registry.cn-hangzhou.aliyuncs.com/syrobin/shortcut-service:latest # 推送        

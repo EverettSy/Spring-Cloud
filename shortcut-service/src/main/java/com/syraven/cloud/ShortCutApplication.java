@@ -8,7 +8,7 @@ import com.syraven.cloud.utlis.JwtUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
  */
 
 @EnableDynamicThreadPool
-@EnableEurekaClient
+@EnableDiscoveryClient
 @SpringBootApplication
 //@ComponentScan(basePackages = {"com.syraven.cloud.*"})
 @MapperScan("com.syraven.cloud.*.mapper")

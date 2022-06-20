@@ -5,6 +5,9 @@ spring:
     name: shortcut-service
   cloud:
     nacos:
+      discovery:
+        server-addr: 47.97.166.67:8848
+        namespace: a5906467-da67-4b02-bd8b-5135bb755529 #命名空间
       config:
         server-addr: 47.97.166.67:8848 #Nacos 地址
         namespace: a5906467-da67-4b02-bd8b-5135bb755529 #命名空间
@@ -37,15 +40,8 @@ spring:
             refresh: true
 
 management:
-  endpoint:
-    health:
-      show-details: always #显示健康详情
-    shutdown:
-      enabled: true # 开启shutdown端点访问
   endpoints:
     jmx:
       exposure:
-        exclude: "*"
-    web:
-      exposure:
-        include: "*"
+        include: "health,info"
+

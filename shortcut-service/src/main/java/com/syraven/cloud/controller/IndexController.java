@@ -1,13 +1,12 @@
 package com.syraven.cloud.controller;
 
 import com.syraven.cloud.config.ServerInitConfiguration;
-import org.apache.commons.lang.StringUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
 
 /**
  * @ClassName IndexController
@@ -17,9 +16,9 @@ import javax.annotation.Resource;
  * @Version V1.0
  **/
 @Controller
+@RequiredArgsConstructor
 public class IndexController {
 
-    @Resource
     private ServerInitConfiguration serverInitConfiguration;
 
     @Value("${common.domain}")

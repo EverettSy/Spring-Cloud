@@ -1,6 +1,7 @@
 package com.syraven.cloud.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -52,7 +53,10 @@ public class DefaultSecurityConfig {
                 .authorizeRequests(authorizeRequests -> authorizeRequests
                         .mvcMatchers("/auth/*").authenticated()
                 )
-                .csrf().disable()
+                .requestMatcher(EndpointRequest.toAnyEndpoint())
+                .authorizeRequests(requests -> requests.anyRequest().permitAll())
+                .csrf()
+                .disable()
                 .formLogin(withDefaults());
         return http.build();
 

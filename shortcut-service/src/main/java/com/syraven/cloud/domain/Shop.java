@@ -1,16 +1,10 @@
 package com.syraven.cloud.domain;
 
 import com.google.common.collect.Lists;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -96,14 +90,11 @@ public class Shop {
             new Shop("香蕉"),new Shop("苹果"));
 
     private static final Executor executor =
-            Executors.newFixedThreadPool(Math.min(shops.size(),100), new ThreadFactory() {
-                @Override
-                public Thread newThread(@NotNull Runnable r) {
-                    Thread thread = new Thread(r);
-                    //设置守护进程---这种方式不会阻止程序关掉
-                    thread.setDaemon(true);
-                    return thread;
-                }
+            Executors.newFixedThreadPool(Math.min(shops.size(),100), r -> {
+                Thread thread = new Thread(r);
+                //设置守护进程---这种方式不会阻止程序关掉
+                thread.setDaemon(true);
+                return thread;
             });
 
 

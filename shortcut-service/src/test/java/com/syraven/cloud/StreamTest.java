@@ -1,11 +1,17 @@
 package com.syraven.cloud;
 
+import com.google.common.collect.Lists;
+import com.syraven.cloud.domain.User;
 import org.apache.commons.lang3.SystemUtils;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: StreamTest
@@ -14,7 +20,7 @@ import java.util.function.Predicate;
  * @Date 2021-11-16 5:33 下午
  * @Version V1.0
  */
-public class StreamTest extends SpringTest {
+public class StreamTest {
 
     /*public static void main(String[] args) {
         List<User> users = Lists.newArrayList();
@@ -124,9 +130,59 @@ public class StreamTest extends SpringTest {
 
 
 
+    @Test
+    public void testMap(){
+
+        List<User> mkDataList = Lists.newArrayList();
+        List<String> resList = Lists.newArrayList();
+        mkDataList.stream()
+                .map(user -> user.getPermissionsList())
+                .forEach(pList -> pList.stream()
+                        .forEach(perStr -> {
+                            if(!resList.contains(perStr)){
+                                resList.add(perStr);
+                            }
+                        }));
+        System.out.println(resList);
+
+    }
 
 
+    @Test
+    public void testFlatMap(){
+        List<User> mkDataList = Lists.newArrayList();
+        List<String> resList = Lists.newArrayList();
+        mkDataList.stream()
+                .flatMap(user -> user.getPermissionsList().stream())
+                .distinct()
+                .forEach(perStr -> {
+                    if(!resList.contains(perStr)){
+                        resList.add(perStr);
+                    }
+                });
+        System.out.println(resList);
+    }
 
 
+    @Test
+    public void testMap1() {
+        String[] words = new String[]{"Hello", "World"};
+        List<String[]> a = Arrays.stream(words)
+                .map(word -> word.split(""))
+                .distinct()
+                .collect(Collectors.toList());
+       a.forEach(System.out::println);
+    }
+
+    @Test
+    public void testMap2() {
+        String[] words = new String[]{"Hello","World"};
+        List<String> a = Arrays.stream(words)
+                .map(word -> word.split(""))
+                .flatMap(Arrays::stream)
+                .distinct()
+                .collect(Collectors.toList());
+        a.forEach(System.out::print);
+    }
 
 }

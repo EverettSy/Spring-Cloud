@@ -4,7 +4,7 @@ RUN mkdir -p /shortcut-service
 
 WORKDIR /shortcut-service
 
-ARG JAR_FILE=shortcut-service/target/shortcut-service.jar
+ARG JAR_FILE=target/shortcut-service.jar
 
 COPY ${JAR_FILE} app.jar
 

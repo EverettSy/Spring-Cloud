@@ -11,15 +11,17 @@ jobs:
   build: # 一个名叫build的任务（名字可以随便起）
     runs-on: ubuntu-latest # 基于最新版Ubuntu系统执行下列任务
     steps:
-    - uses: actions/checkout@v3 # 将仓库内容拷贝到Ubuntu系统的虚拟环境
-
-    - name: Use Short Service # 切换目录
+    - uses: actions/checkout@v3 # 使用actions/checkout@v3插件，检出代码
+    - name: Login to ACR
+      uses: aliyun/acr-login@v1 # 使用阿里云镜像服务action 登录ACR
+      with:
+        login-server: https://registry.cn-hangzhou.aliyuncs.com
+        username: "${{ secrets.DOCKER_USER_NAME }}"
+        password: "${{ secrets.DOCKER_PASSWORD }}"
+    - name: Build and push image
+      env:
+        IMAGE_TAG: ${{ github.sha }} # 用于标记容器版本号
       run: |
         cd shortcut-service
-    - name: Build the Docker image # 步骤名字
-      run: |
-        docker login --username=${{ secrets.DOCKER_USER_NAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_ACCESS_TOKEN }} # 登录docker，并使用Secret里配置的参数
-        cd shortcut-service
-        docker build -t shortcut-service:latest . #执行构建
-        docker tag shortcut-service registry.cn-hangzhou.aliyuncs.com/syrobin/shortcut-service # tag
-        docker push registry.cn-hangzhou.aliyuncs.com/syrobin/shortcut-service:latest # 推送        
+        docker build -t registry.cn-hangzhou.aliyuncs.com/syrobin/shortcut-service:$IMAGE_TAG .
+        docker push registry.cn-hangzhou.aliyuncs.com/syrobin/shortcut-service:$IMAGE_TAG

@@ -6,7 +6,7 @@ WORKDIR /shortcut-service
 
 ARG JAR_FILE=target/shortcut-service.jar
 
-COPY ${JAR_FILE} app.jar
+COPY --from=builder ${JAR_FILE} app.jar
 
 EXPOSE 8202
 

@@ -3,7 +3,7 @@ name: Docker Image CI # Actions名称
 on:
   push:
     branches: [ master ]
-    paths:   # 这里是用来指定哪个文件更改，才会触发的
+    paths: # 这里是用来指定哪个文件更改，才会触发的
       - 'shortcut-service/**'
 
 jobs:

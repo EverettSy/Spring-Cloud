@@ -22,6 +22,9 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
+    - name: Use ShortCut Service # 切换目录
+      run: |
+        cd shortcut-service
 
     - name: Build with Maven  # 编译打包
       run: mvn clean package -Dmaven.test.skip=true

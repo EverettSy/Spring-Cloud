@@ -22,6 +22,7 @@ jobs:
       env:
         IMAGE_TAG: ${{ github.sha }} # 用于标记容器版本号
       run: |
+        docker login --username=${{ secrets.DOCKER_USER_NAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_PASSWORD }} # 登录docker，并使用Secret里配置的参数
         cd shortcut-service
         docker build -t registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:$IMAGE_TAG .
         docker push registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:$IMAGE_TAG

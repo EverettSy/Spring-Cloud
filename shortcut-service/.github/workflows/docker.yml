@@ -3,7 +3,7 @@ name: Docker Image CI # Actions名称
 on:
   push:
     branches: [ master ]
-    paths: # 这里是用来指定哪个文件更改，才会触发的
+    paths:   # 这里是用来指定哪个文件更改，才会触发的
       - 'shortcut-service/**'
 
 jobs:
@@ -24,7 +24,9 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven  # 编译打包
-        run: mvn clean package -Dmaven.test.skip=true
+        run: |
+          cd shortcut-service
+          mvn clean package -Dmaven.test.skip=true
 
       - name: Login to ACR
         uses: aliyun/acr-login@v1 # 使用阿里云镜像服务action 登录ACR

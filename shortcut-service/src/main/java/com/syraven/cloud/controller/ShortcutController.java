@@ -1,20 +1,16 @@
 package com.syraven.cloud.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.syraven.cloud.config.ServerInitConfiguration;
-import com.syraven.cloud.service.UrlConvertService;
 import com.syraven.cloud.record.CommonResult;
+import com.syraven.cloud.service.UrlConvertService;
 import com.syraven.cloud.utlis.QRcodeUtils;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.image.BufferedImage;
 
@@ -41,7 +37,8 @@ public class ShortcutController {
     @PostMapping("/convert")
     public CommonResult<String> convertUrl(@RequestParam String url){
         String shortUrl = urlConvertService.convertUrl(url);
-        String coverUrl = StringUtils.isEmpty(domain) ? serverInitConfiguration.getUrl()+"/"+shortUrl:domain+"/"+shortUrl;
+        String coverUrl = StringUtils.isEmpty(domain) ? serverInitConfiguration.getUrl() + "/" + shortUrl :
+                domain + "/" + shortUrl;
         return CommonResult.success(coverUrl);
     }
 

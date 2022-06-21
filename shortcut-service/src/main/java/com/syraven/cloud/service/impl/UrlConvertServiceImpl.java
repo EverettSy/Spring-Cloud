@@ -83,6 +83,6 @@ public class UrlConvertServiceImpl implements UrlConvertService {
         String shortcut = shortUrl.substring(shortUrl.lastIndexOf("/") + 1);
         String url = redisTemplate.opsForValue().get(shortcut);
         log.info("还原成功----->[真实Url]={}", url);
-        return url;
+        return url.replaceAll("\"", "");
     }
 }

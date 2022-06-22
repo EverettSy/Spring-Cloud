@@ -50,7 +50,10 @@ jobs:
     steps:
       - name: Deploy
         uses: appleboy/ssh-action@master
+        env:
+          APP_NAME: "short-service"
         with:
+          envs: APP_NAME
           host: ${{ secrets.HOST }} # 服务器ip
           username: ${{ secrets.HOST_USERNAME }} # 服务器登录用户名
           password: ${{ secrets.HOST_PASSWORD }} # 服务器登录密码
@@ -67,6 +70,10 @@ jobs:
             # 拉取最新latest版本镜像
             docker pull ${{ secrets.DOCKER_REPOSITORY }}:latest
             # 运行最新latest版本镜像
-            docker run -p 8202:8202 --name shortcut-service -e TZ="Asia/Shanghai" -v /etc/localtime:/etc/localtime  -v 
-            /data/app/shortcut-service/logs:/var/logs -d ${{ secrets.DOCKER_REPOSITORY }}:latest --network=mysql_default
+            docker run -p 8202:8202 --name $APP_NAME \
+            -e TZ="Asia/Shanghai" \
+            -v /etc/localtime:/etc/localtime  \
+            -v /data/app/$APP_NAME/logs:/var/logs  \
+            -d ${{ secrets.DOCKER_REPOSITORY }}:latest \
+            --network mysql_default
       - run: echo "🎉----Deploy End----"

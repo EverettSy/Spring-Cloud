@@ -43,5 +43,6 @@ management:
   endpoints:
     jmx:
       exposure:
-        include: "health,info"
+        include: '*' # 测试使用，开启了所有端点，生产环境不建议 *
+
 

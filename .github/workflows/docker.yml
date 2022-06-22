@@ -42,3 +42,29 @@ jobs:
         cd shortcut-service
         docker build -t registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:$IMAGE_TAG .
         docker push registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:$IMAGE_TAG
+
+  deploy: # docker部署
+    needs: [ build ]
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }} # 服务器ip
+          username: ${{ secrets.HOST_USERNAME }} # 服务器登录用户名
+          password: ${{ secrets.HOST_PASSWORD }} # 服务器登录密码
+          port: ${{ secrets.HOST_PORT }} # 服务器ssh端口
+          script: |
+             # 停止旧版容器
+             docker stop $(docker ps --filter ancestor=${{ secrets.DOCKER_REPOSITORY }} -q)
+             # 删除旧版容器
+             docker rm -f $(docker ps -a --filter ancestor=${{ secrets.DOCKER_REPOSITORY }}:latest -q)
+             # 删除旧版镜像
+             docker rmi -f $(docker images ${{ secrets.DOCKER_REPOSITORY }}:latest -q)
+             # 登录阿里云镜像服务器
+             docker login --username=${{ secrets.DOCKER_USER_NAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
+             # 拉取最新latest版本镜像
+             docker pull ${{ secrets.DOCKER_REPOSITORY }}:latest
+             # 运行最新latest版本镜像
+             docker run -d -p 8000:4000 ${{ secrets.DOCKER_REPOSITORY }}:latest

@@ -75,5 +75,5 @@ jobs:
             -v /etc/localtime:/etc/localtime  \
             -v /data/app/$APP_NAME/logs:/var/logs  \
             -d ${{ secrets.DOCKER_REPOSITORY }}:latest \
-            --network mysql_default
+            -net=mysql_default
       - run: echo "🎉----Deploy End----"

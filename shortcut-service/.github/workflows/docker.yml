@@ -37,7 +37,7 @@ jobs:
 
       - name: Build and push image
         env:
-          IMAGE_TAG: ${{ github.sha }} # 用于标记容器版本号
+          IMAGE_TAG: latest # 用于标记容器版本号
         run: |
           cd shortcut-service
           docker build -t registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:$IMAGE_TAG .

@@ -74,6 +74,5 @@ jobs:
             -e TZ="Asia/Shanghai" \
             -v /etc/localtime:/etc/localtime  \
             -v /data/app/$APP_NAME/logs:/var/logs  \
-            -d ${{ secrets.DOCKER_REPOSITORY }}:latest \
-            --network host
+            -d ${{ secrets.DOCKER_REPOSITORY }}:latest
       - run: echo "🎉----Deploy End----"

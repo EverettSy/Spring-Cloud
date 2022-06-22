@@ -11,37 +11,37 @@ jobs:
   build: # 一个名叫build的任务（名字可以随便起）
     runs-on: ubuntu-latest # 基于最新版Ubuntu系统执行下列任务
     steps:
-    - uses: actions/checkout@v3 # 使用actions/checkout@v3插件，检出代码
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-    - name: Cache Maven packages
-      uses: actions/cache@v2.1.4
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+      - uses: actions/checkout@v3 # 使用actions/checkout@v3插件，检出代码
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
-    - name: Build with Maven  # 编译打包
-      run: |
-        cd shortcut-service
-        mvn clean package -Dmaven.test.skip=true
+      - name: Build with Maven  # 编译打包
+        run: |
+          cd shortcut-service
+          mvn clean package -Dmaven.test.skip=true
 
-    - name: Login to ACR
-      uses: aliyun/acr-login@v1 # 使用阿里云镜像服务action 登录ACR
-      with:
-        login-server: https://registry.cn-hangzhou.aliyuncs.com
-        username: "${{ secrets.DOCKER_USER_NAME }}"
-        password: "${{ secrets.DOCKER_PASSWORD }}"
+      - name: Login to ACR
+        uses: aliyun/acr-login@v1 # 使用阿里云镜像服务action 登录ACR
+        with:
+          login-server: https://registry.cn-hangzhou.aliyuncs.com
+          username: "${{ secrets.DOCKER_USER_NAME }}"
+          password: "${{ secrets.DOCKER_PASSWORD }}"
 
-    - name: Build and push image
-      env:
-        IMAGE_TAG: latest # 用于标记容器版本号
-      run: |
-        cd shortcut-service
-        docker build -t registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:$IMAGE_TAG .
-        docker push registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:$IMAGE_TAG
+      - name: Build and push image
+        env:
+          IMAGE_TAG: latest # 用于标记容器版本号
+        run: |
+          cd shortcut-service
+          docker build -t registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:$IMAGE_TAG .
+          docker push registry.cn-hangzhou.aliyuncs.com/syrobin/short-service:$IMAGE_TAG
 
   deploy: # docker部署
     needs: [ build ]
@@ -50,21 +50,25 @@ jobs:
     steps:
       - name: Deploy
         uses: appleboy/ssh-action@master
+        env:
+          APP_NAME: shortcut-service
         with:
           host: ${{ secrets.HOST }} # 服务器ip
           username: ${{ secrets.HOST_USERNAME }} # 服务器登录用户名
           password: ${{ secrets.HOST_PASSWORD }} # 服务器登录密码
           port: ${{ secrets.HOST_PORT }} # 服务器ssh端口
           script: |
-             # 停止旧版容器
-             docker stop $(docker ps --filter ancestor=${{ secrets.DOCKER_REPOSITORY }} -q)
-             # 删除旧版容器
-             docker rm -f $(docker ps -a --filter ancestor=${{ secrets.DOCKER_REPOSITORY }}:latest -q)
-             # 删除旧版镜像
-             docker rmi -f $(docker images ${{ secrets.DOCKER_REPOSITORY }}:latest -q)
-             # 登录阿里云镜像服务器
-             docker login --username=${{ secrets.DOCKER_USER_NAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-             # 拉取最新latest版本镜像
-             docker pull ${{ secrets.DOCKER_REPOSITORY }}:latest
-             # 运行最新latest版本镜像
-             docker run -d -p 8202:8202 ${{ secrets.DOCKER_REPOSITORY }}:latest
+            # 停止旧版容器
+            docker stop $(docker ps --filter ancestor=${{ secrets.DOCKER_REPOSITORY }} -q)
+            # 删除旧版容器
+            docker rm -f $(docker ps -a --filter ancestor=${{ secrets.DOCKER_REPOSITORY }}:latest -q)
+            # 删除旧版镜像
+            docker rmi -f $(docker images ${{ secrets.DOCKER_REPOSITORY }}:latest -q)
+            # 登录阿里云镜像服务器
+            docker login --username=${{ secrets.DOCKER_USER_NAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
+            # 拉取最新latest版本镜像
+            docker pull ${{ secrets.DOCKER_REPOSITORY }}:latest
+            # 运行最新latest版本镜像
+            docker run -p 8202:8202 --name $APP_NAME -e TZ="Asia/Shanghai" -v /etc/localtime:/etc/localtime  -v 
+            /data/app/$APP_NAME/logs:/var/logs -d ${{ secrets.DOCKER_REPOSITORY }}:latest --network=mysql_default
+      - run: echo "🎉----start container----"

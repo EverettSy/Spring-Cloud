@@ -67,4 +67,4 @@ jobs:
             # 拉取最新latest版本镜像
             docker pull ${{ secrets.DOCKER_REPOSITORY }}:latest
             # 运行最新latest版本镜像
-            docker run -d -p 8000:4000 ${{ secrets.DOCKER_REPOSITORY }}:latest
+            docker run -d -p 8202:8202 ${{ secrets.DOCKER_REPOSITORY }}:latest

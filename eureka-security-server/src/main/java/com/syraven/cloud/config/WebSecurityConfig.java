@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * 默认情况下添加SpringSecurity依赖的应用每个请求都需要添加CSRF token才能访问，
  * Eureka客户端注册时并不会添加，所以需要配置/eureka/**路径不需要CSRF token。
  * @author Raven
- * @date 2019/11/6 23:35
+ * @date 2019/11/7 23:35
  */
 @Configuration
 @EnableWebSecurity

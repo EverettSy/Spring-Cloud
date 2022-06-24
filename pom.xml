@@ -1,171 +1,225 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.7</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.7</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
-	<groupId>com.syrobin.cloud</groupId>
-	<artifactId>syrobin-cloud</artifactId>
-	<name>${project.artifactId}</name>
-	<version>1.0.0</version>
-	<packaging>pom</packaging>
-
-
-	<!-- 属性定义-->
-	<properties>
-		<spring-boot.version>2.6.7</spring-boot.version>
-		<spring-cloud.version>2021.0.2</spring-cloud.version>
-		<spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
-		<java.version>1.8</java.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<seata.version>1.4.2</seata.version>
-		<mybatis.plus.version>3.5.1</mybatis.plus.version>
-		<hutool.version>5.8.0</hutool.version>
-		<captcha.version>1.2.7</captcha.version>
-		<swagger.fox.version>3.0.0</swagger.fox.version>
+    <groupId>com.syrobin.cloud</groupId>
+    <artifactId>syrobin-cloud</artifactId>
+    <name>${project.artifactId}</name>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
 
 
-		<knife4j.version>3.0.2</knife4j.version>
-		<velocity.version>1.7</velocity.version>
-		<lcn.version>4.1.0</lcn.version>
-		<jasypt.version>3.0.3</jasypt.version>
-		<ttl.version>2.11.4</ttl.version>
-		<ureport.version>2.2.9</ureport.version>
-		<xxl.job.version>2.3.0</xxl.job.version>
-		<!--  默认忽略docker构建 -->
-		<docker.skip>false</docker.skip>
+    <!-- 属性定义-->
+    <properties>
+        <spring-boot.version>2.6.7</spring-boot.version>
+        <spring-cloud.version>2021.0.2</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <seata.version>1.4.2</seata.version>
+        <mybatis.plus.version>3.5.1</mybatis.plus.version>
+        <hutool.version>5.8.0</hutool.version>
+        <captcha.version>1.2.7</captcha.version>
+        <swagger.fox.version>3.0.0</swagger.fox.version>
 
-	</properties>
 
-	<!-- 以下依赖 全局所有的模块都会引入  -->
-	<dependencies>
-		<!--配置文件处理器-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<!--暴露actuator相关端口-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
+        <knife4j.version>3.0.2</knife4j.version>
+        <velocity.version>1.7</velocity.version>
+        <lcn.version>4.1.0</lcn.version>
+        <jasypt.version>3.0.3</jasypt.version>
+        <ttl.version>2.11.4</ttl.version>
+        <ureport.version>2.2.9</ureport.version>
+        <xxl.job.version>2.3.0</xxl.job.version>
+        <!--  默认忽略docker构建 -->
+        <docker.skip>false</docker.skip>
 
-		<dependency>
-			<groupId>jakarta.validation</groupId>
-			<artifactId>jakarta.validation-api</artifactId>
-		</dependency>
+    </properties>
 
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>transmittable-thread-local</artifactId>
-			<version>2.12.6</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-all</artifactId>
-			<version>${hutool.version}</version>
-		</dependency>
+    <!-- 以下依赖 全局所有的模块都会引入  -->
+    <dependencies>
+        <!--配置文件处理器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!--暴露actuator相关端口-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
-		<!--Lombok-->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!--测试依赖-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>2.12.6</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
 
-	<modules>
-		<!--<module>spring-boot-commons</module>
-		<module>spring-cloud-common</module>
+        <!--Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--测试依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <modules>
+        <!--<module>spring-boot-commons</module>
+        <module>spring-cloud-common</module>
         <module>spring-security-cloud</module>
         <module>spring-security-cloud/oauth2-auth-server-oidc</module>-->
     </modules>
 
-	<dependencyManagement>
-		<dependencies>
-			<!-- Spring Boot 依赖 -->
-			<!--<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>-->
-			<!--Spring Cloud 公共版本定义-->
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<!--Spring Cloud Alibaba-->
-			<dependency>
-				<groupId>com.alibaba.cloud</groupId>
-				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
-				<version>${spring-cloud-alibaba.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<!-- SpringCloudAlibaba Seata依赖 -->
-			<dependency>
-				<groupId>io.seata</groupId>
-				<artifactId>seata-spring-boot-starter</artifactId>
-				<version>${seata.version}</version>
-			</dependency>
-			<!-- mybatis plus依赖 -->
-			<dependency>
-				<groupId>com.baomidou</groupId>
-				<artifactId>mybatis-plus-boot-starter</artifactId>
-				<version>${mybatis.plus.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot 依赖 -->
+            <!--<dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>-->
+            <!--Spring Cloud 公共版本定义-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--Spring Cloud Alibaba-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- SpringCloudAlibaba Seata依赖 -->
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>${seata.version}</version>
+            </dependency>
+            <!-- mybatis plus依赖 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-	<build>
-		<finalName>${project.name}</finalName>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring-boot.version}</version>
-				<configuration>
-					<finalName>${project.build.finalName}</finalName>
-					<layers>
-						<enabled>true</enabled>
-					</layers>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <finalName>${project.build.finalName}</finalName>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- docker 打包插件 https://github.com/GoogleContainerTools/jib-->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <from>
+                        <!--base image-->
+                        <image>openjdk:alpine</image>
+                    </from>
+                    <!-- 最后生成的镜像配置 -->
+                    <to>
+                        <!-- push docer-hub官方仓库。用户名/镜像名：版本号， -->
+                        <image>registry.cn-hangzhou.aliyuncs.com/syrobin/short-service</image>
+                        <!-- 如果是阿里云的容器镜像仓库，则使用容器的配置 前缀/命名空间/仓库名 -->
+                        <!--<image>registry.cn-chengdu.aliyuncs.com/renbaojia/ctfo</image>-->
+                        <tags>
+                            <!--版本号-->
+                            <tag>latest</tag>
+                        </tags>
+                        <auth>
+                            <!--在docker-hub或者阿里云上的账号和密码-->
+                            <username>xx</username>
+                            <password>xx</password>
+                        </auth>
+                    </to>
+                    <container>
+                        <!--springboot项目的入口类-->
+                        <mainClass>com.syraven.cloud.ShortCutApplication</mainClass>
+                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                        <ports>
+                            <!--指定镜像端口 , 这里没用 dockfile的操作-->
+                            <port>8202</port>
+                        </ports>
+                        <jvmFlags>
+                            <!--指定JVM参数-->
+                            <jvmFlag>-Xmx512m</jvmFlag>
+                            <jvmFlag>--Xms512m</jvmFlag>
+                        </jvmFlags>
+                        <environment>
+                            <!--配置使用的时区-->
+                            <TZ>Asia/Shanghai</TZ>
+                        </environment>
+                    </container>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

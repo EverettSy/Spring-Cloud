@@ -51,4 +51,4 @@ Undertow 是基于 XNIO 的 Web 服务容器。在 XNIO 的基础上，增加：
 
 ## 总结
 
-我们这一节详细介绍了 Undertow 的结构，并且说明了 Undertow 的优点以及让我们比较担心的地方，并且与其他的 Web 容器做了对比。下一节我们将会分析 Undertow 的详细配置。
+!>我们这一节详细介绍了 Undertow 的结构，并且说明了 Undertow 的优点以及让我们比较担心的地方，并且与其他的 Web 容器做了对比。下一节我们将会分析 Undertow 的详细配置。

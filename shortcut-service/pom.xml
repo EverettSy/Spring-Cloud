@@ -210,6 +210,13 @@
             <artifactId>hippo4j-core-spring-boot-starter</artifactId>
             <version>${hippo4j.version}</version>
         </dependency>
+
+        <!--添加jedis依赖-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.3.0</version>
+        </dependency>
     </dependencies>
 
 </project>

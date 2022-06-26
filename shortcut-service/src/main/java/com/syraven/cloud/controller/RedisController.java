@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "Redis")
 public class RedisController {
 
-    private  final RedisService redisService;
+    private final RedisService redisService;
 
     @ApiOperation(value = "获取Redis的运行信息",httpMethod = "GET")
     @GetMapping("/info")

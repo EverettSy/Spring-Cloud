@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -20,10 +20,11 @@
 
     <!-- 属性定义-->
     <properties>
-        <spring-boot.version>2.6.7</spring-boot.version>
-        <spring-cloud.version>2021.0.2</spring-cloud.version>
+        <spring-boot.version>2.7.0</spring-boot.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
         <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <seata.version>1.4.2</seata.version>
@@ -31,17 +32,15 @@
         <hutool.version>5.8.0</hutool.version>
         <captcha.version>1.2.7</captcha.version>
         <swagger.fox.version>3.0.0</swagger.fox.version>
+        <spring.authorization.version>0.3.1</spring.authorization.version>
 
-
-        <knife4j.version>3.0.2</knife4j.version>
-        <velocity.version>1.7</velocity.version>
-        <lcn.version>4.1.0</lcn.version>
-        <jasypt.version>3.0.3</jasypt.version>
-        <ttl.version>2.11.4</ttl.version>
-        <ureport.version>2.2.9</ureport.version>
-        <xxl.job.version>2.3.0</xxl.job.version>
-        <!--  默认忽略docker构建 -->
-        <docker.skip>false</docker.skip>
+        <!-- docker 插件-->
+        <docker.plugin.version>3.2.1</docker.plugin.version>
+        <docker.host>http://192.168.0.100:2375</docker.host>
+        <docker.registry>registry.cn-hangzhou.aliyuncs.com</docker.registry>
+        <docker.namespace>syrobin</docker.namespace>
+        <docker.username>username</docker.username>
+        <docker.password>password</docker.password>
 
     </properties>
 
@@ -169,7 +168,7 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>${docker.plugin.version}</version>
                 <configuration>
                     <from>
                         <!--base image-->
@@ -178,7 +177,7 @@
                     <!-- 最后生成的镜像配置 -->
                     <to>
                         <!-- push docer-hub官方仓库。用户名/镜像名：版本号， -->
-                        <image>registry.cn-hangzhou.aliyuncs.com/syrobin/short-service</image>
+                        <image>${docker.registry}/${docker.namespace}/${project.name}</image>
                         <!-- 如果是阿里云的容器镜像仓库，则使用容器的配置 前缀/命名空间/仓库名 -->
                         <!--<image>registry.cn-chengdu.aliyuncs.com/renbaojia/ctfo</image>-->
                         <tags>
@@ -187,8 +186,8 @@
                         </tags>
                         <auth>
                             <!--在docker-hub或者阿里云上的账号和密码-->
-                            <username>xx</username>
-                            <password>xx</password>
+                            <username>${docker.username}</username>
+                            <password>${docker.password}</password>
                         </auth>
                     </to>
                     <container>
@@ -210,6 +209,7 @@
                         </environment>
                     </container>
                 </configuration>
+                <!--绑定到maven package阶段-->
                 <!--<executions>
                     <execution>
                         <phase>package</phase>

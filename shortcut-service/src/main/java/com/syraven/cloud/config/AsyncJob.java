@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 public class AsyncJob {
 
     @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     @Resource
     private BloomFilter bloomFilter;

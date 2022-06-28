@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Bean;
 /**
  * @author YuSong
  */
-
 @EnableDynamicThreadPool
 @EnableDiscoveryClient
 @SpringBootApplication

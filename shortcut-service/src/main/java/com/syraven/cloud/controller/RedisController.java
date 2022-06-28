@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/redis")
+@RequestMapping("/short/redis")
 @Api(tags = "Redis")
 public class RedisController {
 

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
  * redis 配置类
@@ -43,10 +43,10 @@ public class RedisConfiguration {
         mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.EVERYTHING);
         serializer.setObjectMapper(mapper);
 
-        template.setValueSerializer(serializer);
         // 使用StringRedisSerializer来序列化和反序列化redis的key值
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setKeySerializer(RedisSerializer.string());
+        template.setValueSerializer(serializer);
+        template.setHashKeySerializer(RedisSerializer.string());
         template.setHashValueSerializer(serializer);
 
         template.afterPropertiesSet();

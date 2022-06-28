@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class BloomFilter {
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     @Autowired
     private BloomFilterHelper bloomFilterHelper;

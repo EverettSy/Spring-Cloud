@@ -1,10 +1,10 @@
 package com.syraven.cloud.controller;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.syraven.cloud.config.ServerInitConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,9 +25,9 @@ public class IndexController {
     private String domain;
 
     @GetMapping("/")
-    public ModelAndView index(){
+    public String index(){
         ModelAndView mv = new ModelAndView("index");
-        mv.addObject("domain", StringUtils.isEmpty(domain) ? serverInitConfiguration.getUrl():domain);
-        return mv;
+        mv.addObject("domain", StringUtils.isEmpty(domain) ? serverInitConfiguration.getUrl() : domain);
+        return "index";
     }
 }

@@ -1,59 +1,22 @@
 package com.syraven.cloud.config;
 
-import lombok.Data;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
- * description:  放行api
- *
- * @author zhouxinlei
- * @date 2021-10-14 11:08:10
+ * description:  用于配置白名单资源路径
  */
-@Data
-@RefreshScope
+@Getter
+@Setter
 @Component
+@ConfigurationProperties(prefix = "secure.ignored")
 public class IgnoreUrlPropsConfig {
 
-    /**
-     * 认证中心默认忽略验证地址
-     */
-    private static final String[] SECURITY_ENDPOINTS = {
-            "/auth/**",
-            "/oauth/**",
-            "/actuator/**",
-            "/v2/api-docs/**",
-            "/swagger/api-docs",
-            "/swagger-ui.html",
-            "/doc.html",
-            "/swagger-resources/**",
-            "/webjars/**",
-            "/druid/**",
-            "/error/**",
-            "/assets/**",
-            "/auth/logout",
-            "/auth/code",
-            "/auth/sms-code",
-            "/short/**",
-            "/app/gonggao/chat/**",
-            "/endpoint-websocket/**",
-            "/topic/game_chat/**",
-            "/gonggao/**"
+    private List<String> urls = new ArrayList<>();
 
-    };
-
-    private List<String> ignoreUrls = new ArrayList<>();
-
-    /**
-     * 首次加载合并ENDPOINTS
-     */
-    @PostConstruct
-    public void initIgnoreSecurity() {
-        Collections.addAll(ignoreUrls, SECURITY_ENDPOINTS);
-    }
 }

@@ -1,5 +1,6 @@
 package com.syraven.cloud.config;
 
+import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.boot.SpringBootVersion;
@@ -62,9 +63,9 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
 
                 // 选择哪些接口作为swagger的doc发布
                 .select()
-                // 对所有api进行监控
+                // 对加有注解的api进行监控
                 //.apis(RequestHandlerSelectors.any())
-                .apis(RequestHandlerSelectors.basePackage("com.syraven.cloud.controller"))
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
                 .build()
 

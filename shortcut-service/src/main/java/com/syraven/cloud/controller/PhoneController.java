@@ -24,7 +24,7 @@ import java.util.List;
  * @date 2022-06-25 19:08
  */
 @RestController
-@RequestMapping("/phone")
+@RequestMapping("/short/phone")
 @Api(tags = "Phone")
 public class PhoneController {
 

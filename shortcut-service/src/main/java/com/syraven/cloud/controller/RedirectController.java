@@ -1,13 +1,13 @@
 package com.syraven.cloud.controller;
 
-import cn.hutool.http.server.HttpServerRequest;
-import cn.hutool.http.server.HttpServerResponse;
 import com.syraven.cloud.service.UrlConvertService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @ClassName RedirectController
@@ -31,8 +31,8 @@ public class RedirectController {
      * @return
      */
     @GetMapping("/url/*")
-    public RedirectView redirect(HttpServerRequest request, HttpServerResponse response) {
-        String shortcut = request.getPath().substring(1);
+    public RedirectView redirect(HttpServletRequest request, HttpServletResponse response) {
+        String shortcut = request.getServletPath().substring(1);
         String url = urlConvertService.revertUrl(shortcut);
         return new RedirectView(url);
     }

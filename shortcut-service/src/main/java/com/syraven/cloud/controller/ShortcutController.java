@@ -38,7 +38,7 @@ public class ShortcutController {
     public CommonResult<String> convertUrl(@RequestParam String url){
         String shortUrl = urlConvertService.convertUrl(url);
         String coverUrl = StringUtils.isEmpty(domain) ? serverInitConfiguration.getUrl() + "/" + shortUrl :
-                domain + "/" + shortUrl;
+                domain + "/" + shortUrl.replaceAll("\"", "");
         return CommonResult.success(coverUrl);
     }
 

@@ -16,12 +16,11 @@
 
 
     <properties>
-        <spring-boot-admin.version>2.6.7</spring-boot-admin.version>
+        <spring-boot-admin.version>2.7.0</spring-boot-admin.version>
         <openfeign.version>3.1.1</openfeign.version>
         <netflix-eureka-client>3.0.2</netflix-eureka-client>
         <redisson-version>3.17.0</redisson-version>
         <hutool.version>5.7.22</hutool.version>
-        <oauth2.authserver.version>0.2.3</oauth2.authserver.version>
         <nimbus.oidc.sdk.version>9.27</nimbus.oidc.sdk.version>
         <okhttp.version>4.9.3</okhttp.version>
         <kryo.version>4.0.2</kryo.version>
@@ -85,21 +84,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
-            <version>${oauth2.authserver.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>oauth2-oidc-sdk</artifactId>
-            <version>${nimbus.oidc.sdk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-        </dependency>
-        <!-- Oauth2 Client依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+            <version>${spring.authorization.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>

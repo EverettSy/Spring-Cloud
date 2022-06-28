@@ -38,11 +38,8 @@ spring:
           - data-id: mybatis-plus.yaml
             group: DEFAULT_GROUP
             refresh: true
-
-management:
-  endpoints:
-    jmx:
-      exposure:
-        include: '*' # 测试使用，开启了所有端点，生产环境不建议 *
-
+          # mybatis-plus 配置
+          - data-id: white-list.yaml
+            group: DEFAULT_GROUP
+            refresh: true
 

@@ -10,7 +10,7 @@
         <version>1.0.0</version>
     </parent>
     <properties>
-        <aws.version>1.12.220</aws.version>
+        <aws.version>1.12.261</aws.version>
     </properties>
 
     <artifactId>syrobin-common-oss</artifactId>

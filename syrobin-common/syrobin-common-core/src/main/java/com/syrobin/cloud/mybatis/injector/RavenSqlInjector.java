@@ -2,6 +2,7 @@ package com.syrobin.cloud.mybatis.injector;
 
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.syrobin.cloud.mybatis.injector.methods.InsertBatch;
 import com.syrobin.cloud.mybatis.injector.methods.InsertIgnore;
 import com.syrobin.cloud.mybatis.injector.methods.InsertIgnoreBatch;
@@ -21,14 +22,14 @@ import java.util.List;
 public class RavenSqlInjector extends DefaultSqlInjector {
 
     @Override
-    public List<AbstractMethod> getMethodList(Class<?> mapperClass) {
+    public List<AbstractMethod> getMethodList(Class<?> mapperClass, TableInfo tableInfo) {
         List<AbstractMethod> methodList = new ArrayList<>();
         methodList.add(new InsertBatch());
         methodList.add(new InsertIgnore());
         methodList.add(new InsertIgnoreBatch());
         methodList.add(new Replace());
         methodList.add(new ReplaceBatch());
-        methodList.addAll(super.getMethodList(mapperClass));
+        methodList.addAll(super.getMethodList(mapperClass, tableInfo));
         return Collections.unmodifiableList(methodList);
     }
 }

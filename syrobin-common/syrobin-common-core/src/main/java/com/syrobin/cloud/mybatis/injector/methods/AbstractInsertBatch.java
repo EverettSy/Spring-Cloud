@@ -60,7 +60,7 @@ public class AbstractInsertBatch extends AbstractMethod {
         String valuesScripts = SqlScriptUtils.convertForeach(valuesScript, COLLECTION, null, ENTITY, COMMA);
         String sql = String.format(sqlTemp, tableInfo.getTableName(), columnScript, valuesScripts);
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
-        return this.addInsertMappedStatement(mapperClass,modelClass, sqlMethod, sqlSource, keyGenerator, keyProperty
+        return this.addInsertMappedStatement(mapperClass, modelClass, sqlMethod, sqlSource, keyGenerator, keyProperty
                 , keyColumn);
     }
 
@@ -77,7 +77,7 @@ public class AbstractInsertBatch extends AbstractMethod {
      */
     private static String getAllInsertSqlColumnMaybeIf(TableInfo tableInfo) {
         List<TableFieldInfo> fieldList = tableInfo.getFieldList();
-        return tableInfo.getKeyInsertSqlColumn(true) + fieldList.stream()
+        return tableInfo.getKeyInsertSqlColumn(true, true) + fieldList.stream()
                 .map(AbstractInsertBatch::getInsertSqlColumnMaybeIf)
                 .collect(Collectors.joining(NEWLINE));
     }
@@ -107,7 +107,7 @@ public class AbstractInsertBatch extends AbstractMethod {
      */
     private static String getAllInsertSqlPropertyMaybeIf(final TableInfo tableInfo) {
         List<TableFieldInfo> fieldList = tableInfo.getFieldList();
-        return tableInfo.getKeyInsertSqlProperty(ENTITY_DOT, true) + fieldList.stream()
+        return tableInfo.getKeyInsertSqlProperty(true, ENTITY_DOT, true) + fieldList.stream()
                 .map(AbstractInsertBatch::getInsertSqlPropertyMaybeIf)
                 .collect(Collectors.joining(NEWLINE));
     }

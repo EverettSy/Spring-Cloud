@@ -19,6 +19,8 @@ SpringCloud 2020系列是一个完整的微服务学习体系，用户可以通�
 * [4.Spring Cloud系列之OpenFeign的生命周期-创建代理](architecture/4.Spring%20Cloud系列之OpenFeign的生命周期-创建代理.md)
 * [5.Spring Cloud系列之LoadBalancer简介](architecture/5.Spring%20Cloud系列之LoadBalancer简介.md)
 * [6.Spring Cloud系列之LoadBalancer核心源码](architecture/6.Spring%20Cloud系列之LoadBalancer核心源码.md)
+* [13.Spring Cloud系列之Eureka架构和核心概念](architecture/13.Eureka架构和核心概念.md)
+* [14.Spring Cloud系列之Eureka的实例配置](architecture/14.Eureka的实例配置.md)
 
 
 

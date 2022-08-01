@@ -15,11 +15,14 @@
   * [10.UnderTow核心配置](architecture/container-log/10.UnderTow核心配置.md)
   * [11.UnderTow AccessLog 配置介绍](architecture/container-log/11.UnderTow%20AccessLog%20配置介绍.md)
   * [12.UnderTow 订制](architecture/container-log/12.UnderTow%20订制.md)
+  * [13.Spring Cloud系列之Eureka架构和核心概念](architecture/13.Eureka架构和核心概念.md)
+  * [14.Spring Cloud系列之Eureka的实例配置](architecture/14.Eureka的实例配置.md)
 
  
-* 技术要点篇
-  
-* 部署篇
+[//]: # (* 技术要点篇)
+
+[//]: # (  )
+[//]: # (* 部署篇)
  
 * 工具篇
   * [RestTemplate 使用简介](tools/restTemplate.md)

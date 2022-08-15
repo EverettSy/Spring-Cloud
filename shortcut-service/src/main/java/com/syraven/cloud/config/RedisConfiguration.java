@@ -5,6 +5,10 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.syraven.cloud.config.bloom.BloomFilterHelper;
+import lombok.extern.log4j.Log4j2;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -14,15 +18,22 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
+import javax.annotation.Resource;
+
 /**
  * redis 配置类
  *
  * @author SyRAVEN
  * @since 2021-07-09 17:46
  */
+@Log4j2
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class RedisConfiguration {
+
+
+    @Resource
+    private  RedisProperties redisProperties;
 
     /**
      * 配置自定义redisTemplate
@@ -61,6 +72,17 @@ public class RedisConfiguration {
     @Bean
     public BloomFilterHelper bloomFilterHelper() {
         return new BloomFilterHelper("shortcut", 1024 * 1024 * 32, 0.0000001d);
+    }
+
+    @Bean
+    public RedissonClient redissonClient() {
+        Config config = new Config();
+        config.useSingleServer()
+                .setAddress("redis://" + redisProperties.getHost() + ":" + redisProperties.getPort())
+                .setPassword(redisProperties.getPassword())
+                .setPingConnectionInterval(redisProperties.getPingConnectionInterval());
+        log.info("RedissonClient connect {} 连接成功", redisProperties.getHost());
+        return Redisson.create(config);
     }
 
 }

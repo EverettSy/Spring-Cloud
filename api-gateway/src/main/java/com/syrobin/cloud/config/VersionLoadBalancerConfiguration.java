@@ -6,6 +6,7 @@ import org.springframework.cloud.loadbalancer.core.ReactorLoadBalancer;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.core.env.Environment;
  * @description: 自定义负载均衡器配置实现类
  * @date 2022-03-22 17:25
  */
+@Configuration(proxyBeanMethods = false)
 public class VersionLoadBalancerConfiguration {
 
     @Bean

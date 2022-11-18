@@ -85,7 +85,6 @@ public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> ex
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(new BufferedImageHttpMessageConverter());
     }
-    // ------------------- private 方法开始
 
     private void responseResult(HttpServletResponse response, CommonResult<String> result) {
         response.setCharacterEncoding("UTF-8");
@@ -97,5 +96,4 @@ public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> ex
             log.error(ex.getMessage());
         }
     }
-    // ------------------ private 方法结束
 }

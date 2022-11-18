@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.syraven.cloud.auth.config;
+package com.syraven.cloud.config.security;
 
 import com.syraven.cloud.config.IgnoreUrlPropsConfig;
 import lombok.Setter;

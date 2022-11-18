@@ -16,4 +16,6 @@ public interface RedisService {
      * @return
      */
     Map<String,Object> getInfo();
+
+    void batchSetMassStrings();
 }

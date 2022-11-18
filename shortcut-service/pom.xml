@@ -16,7 +16,7 @@
 
 
     <properties>
-        <spring-boot-admin.version>2.7.0</spring-boot-admin.version>
+        <spring-boot-admin.version>2.7.7</spring-boot-admin.version>
         <openfeign.version>3.1.1</openfeign.version>
         <netflix-eureka-client>3.0.2</netflix-eureka-client>
         <redisson-version>3.17.0</redisson-version>
@@ -201,6 +201,12 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>3.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aliyun.openservices</groupId>
+            <artifactId>ons-client</artifactId>
+            <version>2.0.4.Final</version>
         </dependency>
     </dependencies>
 

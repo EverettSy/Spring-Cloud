@@ -4,9 +4,11 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 import com.alibaba.ttl.TtlRunnable;
 import com.syraven.cloud.common.enums.Colors;
 import com.syraven.cloud.common.validation.advice.Color;
+import com.syraven.cloud.record.CommonResult;
 import com.syraven.cloud.spring.context.bean.ChildBean;
 import com.syraven.cloud.record.Rest;
 import com.syraven.cloud.record.RestBody;
+import com.syraven.cloud.utlis.ProducerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,10 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 public class TestController {
+
+    //@Autowired
+    private ProducerUtil producerUtil;
+
 
     //线程池传递变量
     public static final ThreadLocal<Integer> transmittableThreadLocal = new TransmittableThreadLocal<>();
@@ -104,4 +110,18 @@ public class TestController {
         return RestBody.okData(color);
     }
 
+
+    @GetMapping("/testSend")
+    public CommonResult testSend() {
+        //同步发送消息
+        producerUtil.sendMag("Tag_SMS","Test_Common_Topic","messageId","同步消息".getBytes());
+        //定时/延时消息
+        producerUtil.sendTimeMsg("Tag_SMS","Test_Common_Topic","messageId","延时消息".getBytes(),
+                System.currentTimeMillis()+1000*10);
+        //单向消息
+        producerUtil.sendOneWayMsg("Tag_SMS","Test_Common_Topic","messageId","单向消息".getBytes());
+        //异步消息
+        producerUtil.sendAsyncMsg("Tag_SMS","Test_Common_Topic","messageId","异步消息".getBytes());
+        return CommonResult.success();
+    }
 }

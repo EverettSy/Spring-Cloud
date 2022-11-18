@@ -2,14 +2,12 @@ package com.syraven.cloud;
 
 import com.google.common.collect.Lists;
 import com.syraven.cloud.domain.User;
-import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -70,24 +68,24 @@ public class StreamTest {
         }
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
-        /*Predicate<Integer> p1 = (n) -> {
-            *//*while (n != 0) {
+        *//*Predicate<Integer> p1 = (n) -> {
+            *//**//*while (n != 0) {
                 if (n % 10 == 7)
                     return true;
                n/= 10;
             }
-            return false;*//*
+            return false;*//**//*
             if (n % 7 != 0) return false;
             if (n % 3 == 0) return true;
             return String.valueOf(n).contains("7");
         };
-        foo(100, p1);*/
+        foo(100, p1);*//*
 
-        /*int x = 121;
+        *//*int x = 121;
         boolean result = isPalindrome(x);
-        System.out.println(result);*/
+        System.out.println(result);*//*
         String initialReference = "initial value referenced";
         AtomicReference<String> atomicStringReference = new AtomicReference<>(initialReference);
 
@@ -108,7 +106,7 @@ public class StreamTest {
 
 
 
-    }
+    }*/
 
 
     public static boolean is(int n) {

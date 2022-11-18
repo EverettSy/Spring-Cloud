@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 @SpringBootApplication
 //@ComponentScan(basePackages = {"com.syraven.cloud.*"})
-@MapperScan("com.syraven.cloud.*.mapper")
+@MapperScan("com.syraven.cloud.mapper")
 public class ShortCutApplication {
 
     public static void main(String[] args) {

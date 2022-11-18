@@ -42,4 +42,8 @@ spring:
           - data-id: white-list.yaml
             group: DEFAULT_GROUP
             refresh: true
+          # rocketmq 配置
+          - data-id: rocketmq.yaml
+            group: DEFAULT_GROUP
+            refresh: true
 

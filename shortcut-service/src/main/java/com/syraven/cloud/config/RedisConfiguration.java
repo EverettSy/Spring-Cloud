@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.syraven.cloud.config.bloom.BloomFilterHelper;
+import com.syraven.cloud.utlis.LockUtils;
 import lombok.extern.log4j.Log4j2;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -83,6 +84,11 @@ public class RedisConfiguration {
                 .setPingConnectionInterval(redisProperties.getPingConnectionInterval());
         log.info("RedissonClient connect {} 连接成功", redisProperties.getHost());
         return Redisson.create(config);
+    }
+
+    @Bean
+    public LockUtils lockUtils(RedissonClient redissonClient) {
+        return new LockUtils(redissonClient);
     }
 
 }

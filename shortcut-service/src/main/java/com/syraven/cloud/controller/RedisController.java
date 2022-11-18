@@ -30,4 +30,12 @@ public class RedisController {
         return CommonResult.success(redisService.getInfo());
     }
 
+    @ApiOperation(value = "管道批量操作",httpMethod = "GET")
+    @GetMapping("/pipelineBatch")
+    public CommonResult pipelineBatch(){
+        redisService.batchSetMassStrings();
+        return CommonResult.success();
+    }
+
+
 }

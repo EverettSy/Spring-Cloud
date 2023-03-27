@@ -13,4 +13,4 @@ EXPOSE 8202
 ENV TZ=Asia/Shanghai JAVA_OPTS="-Xms128m -Xmx256m"
 
 CMD sleep 60; java -jar app.jar $JAVA_OPTS
-xiid
+

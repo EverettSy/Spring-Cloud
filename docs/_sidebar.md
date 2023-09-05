@@ -30,5 +30,6 @@
   * [Elasticsearch官方已支持SQL查询，用起来贼方便！](tools/Elasticsearch使用SQL查询.md)
 * 读书笔记
   * [Raft分布式协议](notes/Raft分布式协议.md)
+  * [Guava 类库中 Lists.transform 踩坑](notes/Guava类库中Lists.transform踩坑.md)
 
 * 面试题篇

@@ -45,6 +45,7 @@ SpringCloud 2020系列是一个完整的微服务学习体系，用户可以通�
 ## 读书笔记篇
 * [Raft分布式协议](notes/Raft分布式协议.md)
 * [Guava 类库中 Lists.transform 踩坑](notes/Guava类库中Lists.transform踩坑.md)
+* [Redis-Cluster 了解](notes/Redis-Cluster%20了解.md)
 
 
 ## 面试题篇

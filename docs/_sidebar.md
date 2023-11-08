@@ -31,5 +31,6 @@
 * 读书笔记
   * [Raft分布式协议](notes/Raft分布式协议.md)
   * [Guava类库中Lists.transform踩坑](notes/Guava类库中Lists.transform踩坑.md)
+  * [Redis-Cluster 了解](notes/Redis-Cluster%20了解.md)
 
 * 面试题篇

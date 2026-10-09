@@ -5,12 +5,8 @@
   <title>SyRobin Blog</title>
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <!-- Docsify v5 core theme, then the Vue add-on to keep the previous green look -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@5/dist/themes/core.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@5/dist/themes/addons/vue.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-dark-mode/dist/style.css" />
-  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar-folder.min.css" />-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@5/dist/themes/addons/core-dark.min.css" media="(prefers-color-scheme: dark)">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
   <script>
 	var _hmt = _hmt || [];
@@ -25,10 +21,15 @@
   </script>
   
 </head>
-<body class="loading">
+<body class="loading sidebar-chevron-right">
   <div id="app"></div>
   <div id="gitalk-container"></div>
+  <!-- Docsify v5 只支持同步渲染，官方可用的最后版本是 mermaid 9.3.0 -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js"></script>
   <script>
+    var mermaidId = 0;
+    mermaid.initialize({ startOnLoad: false });
+
     window.$docsify = {
       name: 'Blog',
       repo: 'https://github.com/EverettSy/Spring-Cloud',
@@ -36,14 +37,20 @@
       coverpage: true,
       loadNavbar: true,
       loadSidebar: true, // 加载自定义侧边栏
+      collapsibleSidebarGroups: true,
       maxLevel: 2, // 默认情况下会抓取文档中所有标题渲染成目录，可配置最大支持渲染的标题层级。
       subMaxLevel: 4, // 生成目录的最大层级
       mergeNavbar: true, // 小屏设备下合并导航栏到侧边栏
       auto2top: true,
+      skipLink: '跳到主要内容',
+      nativeEmoji: true,
+      notFoundPage: true,
       search: {
         placeholder: '搜索',
         noData: '找不到结果!',
-        depth: 3
+        depth: 3,
+        paths: 'auto',
+        resultSource: 'breadcrumb'
       },
       alias: { // 定义路由别名，可以更自由的定义路由规则。 支持正则
         '/.*/_sidebar.md': '/_sidebar.md',//防止意外回退
@@ -55,9 +62,20 @@
         crossChapter: true,
         crossChapterText: true
       },
-      darkMode: {
-        light: {
-          toggleBtnBg: '#42b983'
+      markdown: {
+        renderer: {
+          code: function (token) {
+            var text = token && typeof token === 'object' ? token.text : token;
+            var lang = token && typeof token === 'object' ? token.lang : arguments[1];
+            if (lang === 'mermaid') {
+              try {
+                return '<div class="mermaid">' + mermaid.render('mermaid-svg-' + mermaidId++, text) + '</div>';
+              } catch (error) {
+                return this.origin.code.apply(this, arguments);
+              }
+            }
+            return this.origin.code.apply(this, arguments);
+          }
         }
       },
       plugins: [
@@ -102,10 +120,7 @@
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@5/dist/plugins/search.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@5/dist/plugins/emoji.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify-dark-mode/dist/index.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
   <!-- Gitalk 评论-->
   <script src="https://cdn.jsdelivr.net/npm/docsify@5/dist/plugins/gitalk.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>

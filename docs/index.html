@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>SyRobin Blog</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, userRoot-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/docsify/lib/themes/vue.css">
-  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/docsify-dark-mode/dist/style.css" />
-  <!--<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
-  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar-folder.min.css" />-->
-  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Docsify v5 core theme, then the Vue add-on to keep the previous green look -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@5/dist/themes/core.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@5/dist/themes/addons/vue.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-dark-mode/dist/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar-folder.min.css" />-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
   <script>
 	var _hmt = _hmt || [];
 	(function() { 
@@ -24,7 +25,7 @@
   </script>
   
 </head>
-<body>
+<body class="loading">
   <div id="app"></div>
   <div id="gitalk-container"></div>
   <script>
@@ -93,24 +94,24 @@
       ]
     }
   </script>
-  <script src="//fastly.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/prismjs/components/prism-c.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/prismjs/components/prism-cpp.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/docsify-dark-mode/dist/index.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@5/dist/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@5/dist/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@5/dist/plugins/emoji.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-dark-mode/dist/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
   <!-- Gitalk 评论-->
-  <script src="//fastly.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@5/dist/plugins/gitalk.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
   <!-- 图片缩放-->
-  <script src="//fastly.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
-  <script src="//fastly.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@5/dist/plugins/zoom-image.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   <script>
     // 生成 gitalk 插件
     title = location.hash.match(/#(.*?)([?]|$)/)
